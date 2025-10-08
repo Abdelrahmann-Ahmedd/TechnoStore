@@ -16,6 +16,7 @@ function SimpleSlider({images}:{images:string[]}) {
         <div className="slider-container ">
             <Slider {...settings}>
                 {images.map((imag,ind)=> <figure key={ind} className="">
+                    {/*eslint-disable @next/next/no-img-element */}
                     <img  className="w-100" src={imag} alt="product" style={{height:"350px"}} />
                 </figure>)}
             </Slider>

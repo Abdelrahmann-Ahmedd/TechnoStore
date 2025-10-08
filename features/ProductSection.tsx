@@ -15,7 +15,7 @@ function ProductSection() {
 
     return (
         <section className="container">
-            <ProductList data={products} results={0} />
+            <ProductList data={products} results={0}  metadata={{ currentPage: 1, totalPages: 1 }} />
         </section>
     );
 }

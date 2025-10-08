@@ -110,14 +110,13 @@ export interface CartResponse {
   data: CartData;
 }
 
-export interface PaginatedData<T> {
-    results: number;
-    data: T[];
-    metadata: {
-    currentPage: number,
-    numberOfPages: number,
-    limit: number,
-    nextPage: number
-  },
-}
+type PaginatedData<T> = {
+  data: T[];
+  results: number;
+  metadata?: {
+    currentPage: number;
+    totalPages: number;
+  };
+};
+
 

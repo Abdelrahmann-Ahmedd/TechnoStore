@@ -68,6 +68,7 @@ export default function ProductPage() {
               {product.images?.length > 0 ? (
                 <Carousel images={product.images} />
               ) : (
+                /* eslint-disable @next/next/no-img-element */
                 <img
                   src={product.imageCover}
                   alt={product.title}
