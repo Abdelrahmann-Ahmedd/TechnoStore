@@ -10,14 +10,23 @@ The project follows clean architecture, scalable folder structure, state managem
 💡 Key Features
 
 User Authentication: Login, signup, forget password, JWT handling, and logout.
+
 Protected Routes: Secure pages accessible only for authenticated users.
+
 Product Browsing: Category-based products, sliders, and product search with live filtering.
+
 Cart Management: Add, remove, update products, and persistent cart state.
+
 Checkout & Orders: Complete checkout flow and order history with status (Paid/Pending).
+
 Form Handling: Efficient forms handled using Formik with validation via Yup.
+
 Search Functionality: Live filtering of products as users type.
+
 Responsive Design: Mobile-first layout optimized for all screen sizes.
+
 Performance: Optimized API calls, lazy-loaded images, memoized components, and minimal re-renders.
+
 Clean Architecture: Modular components and separation of concerns for maintainability.
 
 🧩 Technologies & Libraries
