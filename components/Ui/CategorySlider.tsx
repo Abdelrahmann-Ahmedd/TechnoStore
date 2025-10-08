@@ -13,7 +13,7 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
     speed: 600,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     arrows: true,
     swipeToSlide: true,
     pauseOnHover: true,
@@ -63,7 +63,6 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* ✅ Force all images to have the same height */
         .image-wrapper {
           width: 200px;
           height: 200px;
