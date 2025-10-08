@@ -48,16 +48,27 @@ Clean Architecture: Modular components and separation of concerns for maintainab
 🧠 Concepts Demonstrated
 
 ✅ React & Next.js 14 with App Router
+
 ✅ TypeScript interfaces for strong typing
+
 ✅ Clean Architecture & Component Reusability
+
 ✅ Redux Toolkit for state management (auth, cart, orders, products)
+
 ✅ Async Thunks and API handling
+
 ✅ Form handling with Formik and validation using Yup
+
 ✅ Protected routes for secure pages
+
 ✅ Search and filter logic (client-side)
+
 ✅ Responsive design using Bootstrap Grid and utilities
+
 ✅ Performance optimization: memoized components, lazy loading, minimized re-renders
+
 ✅ JWT Authentication with token persistence
+
 ✅ Sliders and carousels using React Slick
 
 🧱 Architecture
@@ -72,24 +83,37 @@ Clean Architecture: Modular components and separation of concerns for maintainab
 
 
 ✅ Each layer is independent for maintainability
+
 ✅ UI logic is separated from API and state
+
 ✅ Services handle all HTTP requests
+
 ✅ Redux slices handle global state
+
 ✅ Features folder contains complex view logic
 
 📱 Responsive Design Strategy
+  
   Bootstrap Grid for layout flexibility
+  
   Adaptive Navbar and sliders
+  
   Media queries for smaller screens
+  
   Fluid typography and spacing
+  
   Mobile-first design for optimal UX
 
 ⚡ Performance Enhancements
 
 Lazy-loaded images with next/image
+
 Memoized components with React.memo
+
 Optimized Redux selectors to minimize re-renders
+
 Efficient API calls via async thunks
+
 Minimal DOM reflows and optimized CSS
 
 🗂️ Folder Structure
