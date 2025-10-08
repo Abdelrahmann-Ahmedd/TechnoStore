@@ -6,10 +6,10 @@ import Carousel from "@/components/Ui/Carousel";
 import { SingleProduct } from "@/models/Product";
 import ProtectedRoute from "@/features/ProtectedRoute";
 import { ProductServices } from "@/services/ProductServices";
-import MainLoader from "@/components/Ui/MainLoader";
 import { addProductToCart } from "@/store/slices/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import toast from "react-hot-toast";
+import LoadingPage  from '@/components/Layout/LoadingPage';
 
 const productCache: Record<string, SingleProduct> = {};
 
@@ -56,7 +56,7 @@ export default function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loadingg) return <MainLoader color="black" />;
+  if (loadingg) return <LoadingPage />;
   if (!product) return <div className="text-center p-5">Product not found</div>;
 
   return (
@@ -88,7 +88,7 @@ export default function ProductPage() {
 
             <h4 className="text-primary my-3">{product.price} EGP</h4>
             <p className="text-secondary">
-              Sold: {product.sold} | Ratings: {product.ratingsQuantity} (
+              Sold: {product.sold>1000000?0:product.sold} | Ratings: {product.ratingsQuantity} (
               {product.ratingsAverage})
               <i className="fa-solid fa-star text-warning fa-3xs"> </i>
             </p>

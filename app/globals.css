@@ -92,17 +92,9 @@ body {
   transform: translateY(-20%);
 }
 
-/*navbar*/
 
-nav .mainbtn{
-  width: auto !important;
-}
 
 /*search part*/
-/* .dropdown-item-hover:hover {
-  background-color: #f8f9fa;
-} */
-
 .search-dropdown {
   border-radius: 12px;
   transition: all 0.2s ease-in-out;

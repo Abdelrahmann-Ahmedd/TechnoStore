@@ -9,15 +9,16 @@ type ButtonProps = {
     children: React.ReactNode;
     rounded: number;
     outline: boolean;
-    target: boolean
+    target: boolean;
+    className?: string;
 };
 
-export function Button({href,color = "primary",onClick,children,rounded,outline,target}: ButtonProps) {
+export function Button({href,color = "primary",onClick,children,rounded,outline,target ,className}: ButtonProps) {
 
     if (href) {
-    return <Link target={target?"_blank":""} onClick={onClick} rel="noopener noreferrer" href={href} className={`btn btn-${color}`}>{children}</Link>;
+    return <Link target={target?"_blank":""} onClick={onClick} rel="noopener noreferrer" href={href} className={`btn btn-${color} ${className}`}>{children}</Link>;
     }
-    return <button  type='button' className={`d-block m-auto w-75 btn btn${outline?"-outline":""}-${color} rounded-${rounded} `} onClick={onClick}>{children}</button>;
+    return <button  type='button' className={`d-block m-auto w-75 btn btn${outline?"-outline":""}-${color} rounded-${rounded} ${className} `} onClick={onClick}>{children}</button>;
 }
 
 const MemoButton = React.memo(Button);
