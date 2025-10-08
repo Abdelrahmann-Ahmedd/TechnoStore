@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -39,4 +39,73 @@ a {
   html {
     color-scheme: dark;
   }
+} */
+
+/* main */
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+a {
+  text-decoration: none;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Encode Sans Expanded', sans-serif;
+  font-size: 14px;
+}
+
+/* slick css*/
+.slick-arrow {
+  display: none !important;
+}
+
+.slider-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.slick-dots:not(.main .slick-dots) {
+  height: 100%;
+  top: 100%;
+}
+
+.slick-dots li:not(.main .slick-dots li)  {
+  width: 20% !important;
+  height: 20% !important; 
+}
+
+
+/*card css*/
+.card {
+  overflow: hidden;
+}
+
+.card button {
+  transform: translateY(200%);
+  transition: 0.5s;
+}
+
+.card:hover button {
+  transform: translateY(-20%);
+}
+
+/*navbar*/
+
+nav .mainbtn{
+  width: auto !important;
+}
+
+/*search part*/
+/* .dropdown-item-hover:hover {
+  background-color: #f8f9fa;
+} */
+
+.search-dropdown {
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+
