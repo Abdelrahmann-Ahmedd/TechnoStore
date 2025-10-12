@@ -1,12 +1,15 @@
 "use client";
 import { Category, PaginatedData } from "@/models/Product";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function SwipeToSlide({ data }: PaginatedData<Category>) {
+  const sliderRef = useRef<Slider>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -25,9 +28,30 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
     ],
   };
 
+  useEffect(() => {
+    // Mark as mounted to ensure client-side render only
+    setIsMounted(true);
+
+    // Force slick to recalculate width after mount
+    setTimeout(() => {
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(0);
+      }
+    }, 300);
+
+    // Optional: force recalculation on resize
+    const handleResize = () => {
+      sliderRef.current?.slickGoTo(0);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (!isMounted) return null; // prevent hydration mismatch in Next.js
+
   return (
     <div className="slider-container w-100 py-4">
-      <Slider {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {data.map((cat) => (
           <div key={cat._id} className="px-3">
             <div

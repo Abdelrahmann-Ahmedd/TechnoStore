@@ -6,9 +6,9 @@ function SimpleSlider({images}:{images:string[]}) {
     const settings = {
         dots: false,
         autoplay: true,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 2500,
         infinite: true,
-        speed: 2500,
+        speed: 2000,
         slidesToShow: 1,
         slidesToScroll: 1,
     };

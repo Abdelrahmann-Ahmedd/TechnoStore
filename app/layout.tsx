@@ -49,10 +49,7 @@ export const metadata: Metadata = {
     url: "https://mystore.com",
     siteName: "MyStore",
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
-  viewport:"width=device-width, initial-scale=1.0"
+  viewport:"width=device-width, initial-scale=1"
 };
 
 // Layout Component
@@ -62,8 +59,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Meta for responsive design */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
 
       <body
