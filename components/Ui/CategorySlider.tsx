@@ -6,9 +6,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function SwipeToSlide({ data }: PaginatedData<Category>) {
+function CategorySlider({ data }: PaginatedData<Category>) {
   const sliderRef = useRef<Slider>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [ready, setReady] = useState(false);
 
   const settings = {
     dots: false,
@@ -17,6 +17,7 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
+    autoplaySpeed: 3000,
     arrows: true,
     swipeToSlide: true,
     pauseOnHover: true,
@@ -29,47 +30,28 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
   };
 
   useEffect(() => {
-    // Mark as mounted to ensure client-side render only
-    setIsMounted(true);
-
-    // Force slick to recalculate width after mount
-    setTimeout(() => {
-      if (sliderRef.current) {
-        sliderRef.current.slickGoTo(0);
-      }
-    }, 300);
-
-    // Optional: force recalculation on resize
-    const handleResize = () => {
-      sliderRef.current?.slickGoTo(0);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const id = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
-  if (!isMounted) return null; // prevent hydration mismatch in Next.js
+  if (!ready) return <div style={{ height: 250 }} />;
 
   return (
     <div className="slider-container w-100 py-4">
       <Slider ref={sliderRef} {...settings}>
         {data.map((cat) => (
           <div key={cat._id} className="px-3">
-            <div
-              className="category-card text-center rounded-4 shadow-sm border border-light-subtle p-3 bg-white h-100 d-flex flex-column justify-content-center align-items-center"
-              style={{ transition: "transform 0.3s ease" }}
-            >
+            <div className="category-card text-center rounded-4 shadow-sm border border-light-subtle p-3 bg-white h-100 d-flex flex-column justify-content-center align-items-center">
               <div className="image-wrapper mb-2">
                 <Image
-                  width={250}
-                  height={250}
-                  alt={cat.name}
+                  width={200}
+                  height={200}
                   src={cat.image}
+                  alt={cat.name}
                   className="category-img rounded-circle"
                 />
               </div>
-              <h6 className="text-dark fw-semibold mt-2 text-truncate w-100">
-                {cat.name}
-              </h6>
+              <h6 className="fw-semibold mt-2 text-truncate">{cat.name}</h6>
             </div>
           </div>
         ))}
@@ -81,41 +63,33 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
           color: #0d6efd;
           font-size: 25px;
         }
-
         .category-card:hover {
           transform: translateY(-6px);
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
-
         .image-wrapper {
-          width: 200px;
-          height: 200px;
-          overflow: hidden;
+          width: 160px;
+          height: 160px;
           display: flex;
           justify-content: center;
           align-items: center;
+          overflow: hidden;
         }
-
         .category-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-
         @media (max-width: 992px) {
-          .image-wrapper {
-            width: 160px;
-            height: 160px;
-          }
-        }
-
-        @media (max-width: 576px) {
           .image-wrapper {
             width: 130px;
             height: 130px;
           }
-          .category-card h6 {
-            font-size: 0.9rem;
+        }
+        @media (max-width: 576px) {
+          .image-wrapper {
+            width: 100px;
+            height: 100px;
           }
         }
       `}</style>
@@ -123,5 +97,4 @@ function SwipeToSlide({ data }: PaginatedData<Category>) {
   );
 }
 
-const CategorySlider = React.memo(SwipeToSlide);
-export default CategorySlider;
+export default React.memo(CategorySlider);
