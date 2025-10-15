@@ -7,34 +7,36 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function CategorySlider({ data }: PaginatedData<Category>) {
+  const [slidesToShow, setSlidesToShow] = useState(5);
   const sliderRef = useRef<Slider>(null);
-  const [ready, setReady] = useState(false);
+
+  const handleResize = () => {
+    const width = window.innerWidth;
+    if (width <= 500) setSlidesToShow(1);
+    else if (width <= 768) setSlidesToShow(2);
+    else if (width <= 1100) setSlidesToShow(3);
+    else if (width <= 1400) setSlidesToShow(4);
+    else setSlidesToShow(5);
+  };
+
+  useEffect(() => {
+    handleResize(); // run once on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 5,
+    slidesToShow,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: true,
     swipeToSlide: true,
     pauseOnHover: true,
-    responsive: [
-      { breakpoint: 1400, settings: { slidesToShow: 4 } },
-      { breakpoint: 1100, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 500, settings: { slidesToShow: 1 } },
-    ],
   };
-
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  if (!ready) return <div style={{ height: 250 }} />;
 
   return (
     <div className="slider-container w-100 py-4">
