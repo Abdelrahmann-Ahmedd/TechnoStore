@@ -7,6 +7,7 @@ import { createCheckoutSession, fetchUserOrders } from "@/store/slices/orderSlic
 import { OrderServices } from "@/services/OrderServices";
 import LoadingPage from "@/components/Layout/LoadingPage";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export default function CheckoutView() {
   const dispatch = useAppDispatch();
@@ -97,7 +98,7 @@ export default function CheckoutView() {
         <p className="text-center">Your cart is empty.</p>
       ) : (
         <div className="table-responsive">
-          <table className="table table-bordered text-center">
+          <table className="table table-striped table-bordered text-center">
             <thead className="table-light">
               <tr>
                 <th>Product</th>
@@ -110,12 +111,13 @@ export default function CheckoutView() {
               {cart.data.products.map(item => (
                 <tr key={item.product._id}>
                   <td className="d-flex align-items-center gap-2">
-                    <img
+                    <Image
+                      className="rounded-2"
                       src={item.product.imageCover}
                       alt={item.product.title}
                       width={50}
                       height={50}
-                      style={{ objectFit: "cover", borderRadius: "8px" }}
+                      loading = "lazy"
                     />
                     <span>{item.product.title}</span>
                   </td>

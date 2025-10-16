@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import React from "react";
 import Slider from "react-slick";
 
@@ -16,8 +17,7 @@ function SimpleSlider({images}:{images:string[]}) {
         <div className="slider-container ">
             <Slider {...settings}>
                 {images.map((imag,ind)=> <figure key={ind} className="">
-                    {/*eslint-disable @next/next/no-img-element */}
-                    <img  className="w-100" src={imag} alt="product" style={{height:"350px"}} />
+                    <Image priority width={200} height={200}  className="w-100" src={imag} alt="product" style={{height:"400px"}} />
                 </figure>)}
             </Slider>
         </div>

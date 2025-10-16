@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUserOrders } from "@/store/slices/orderSlice";
 import { fetchUserCart } from "@/store/slices/cartSlice";
 import LoadingPage from "@/components/Layout/LoadingPage";
+import Image from "next/image";
 
 export default function OrderView() {
   const dispatch = useAppDispatch();
@@ -51,16 +52,13 @@ export default function OrderView() {
                       key={item.product._id}
                       className="d-flex align-items-center gap-2 mb-2"
                     >
-                      <img
+                      <Image
+                        loading="lazy"
+                        width={200}
+                        height={200}
                         src={item.product.imageCover}
                         alt={item.product.title}
-                        className="rounded"
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          objectFit: "cover",
-                          flexShrink: 0,
-                        }}
+                        className="rounded-2 w-50"
                       />
                       <div className="flex-grow-1 text-truncate">
                         <div

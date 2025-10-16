@@ -5,8 +5,8 @@ import notFoundSrc from '../not-found-.webp'
 
 export default function GlobalError() {
   return (
-    <section className="w-100 text-center">
-      <Image src={notFoundSrc} alt="not found page logo" width={800} height={500} />
+    <section className="error w-100 text-center mt-5">
+      <Image className="w-50 m-auto" src={notFoundSrc} alt="not found page logo" width={800} height={450} />
     </section>
   );
 }

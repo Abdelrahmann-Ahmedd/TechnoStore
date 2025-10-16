@@ -12,6 +12,7 @@ import LoadingPage from "@/components/Layout/LoadingPage";
 import { Button } from "@/components/Ui/Button";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CartView() {
   const dispatch = useAppDispatch();
@@ -49,12 +50,13 @@ export default function CartView() {
       {products.map((item) => (
         <div key={item._id} className="row align-items-center mb-4 py-3 border rounded">
           <div className="col-12 col-md-2 text-center mb-3 mb-md-0">
-            <img
+            <Image
               src={item.product.imageCover}
               alt={item.product.title}
-              className="w-100 img-fluid rounded"
-              style={{ maxHeight: "120px" }}
+              className="w-50 img-fluid rounded"
               loading="lazy"
+              width={200}
+              height={200}
             />
           </div>
 
