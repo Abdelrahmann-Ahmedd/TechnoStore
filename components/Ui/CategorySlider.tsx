@@ -1,7 +1,7 @@
 "use client";
 import { Category, PaginatedData } from "@/models/Product";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,6 +25,10 @@ function CategorySlider({ data }: PaginatedData<Category>) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const memoData = useMemo(()=>{
+    return data;
+  },[data])
+
   const settings = {
     dots: false,
     infinite: true,
@@ -41,7 +45,7 @@ function CategorySlider({ data }: PaginatedData<Category>) {
   return (
     <div className="slider-container w-100 py-4">
       <Slider ref={sliderRef} {...settings}>
-        {data.map((cat) => (
+        {memoData.map((cat) => (
           <div key={cat._id} className="px-3">
             <div className="category-card text-center rounded-4 shadow-sm border border-light-subtle p-3 bg-white h-100 d-flex flex-column justify-content-center align-items-center">
               <div className="image-wrapper mb-2">

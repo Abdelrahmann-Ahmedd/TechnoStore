@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import React from "react";
+import React, { useMemo } from "react";
 import Slider from "react-slick";
 
 function SimpleSlider({images}:{images:string[]}) {
@@ -13,10 +13,15 @@ function SimpleSlider({images}:{images:string[]}) {
         slidesToShow: 1,
         slidesToScroll: 1,
     };
+
+    const memoImages = useMemo(()=>{
+        return images
+    },[images])
+
     return (
         <div className="slider-container ">
             <Slider {...settings}>
-                {images.map((imag,ind)=> <figure key={ind} className="">
+                {memoImages.map((imag,ind)=> <figure key={ind} className="">
                     <Image priority width={200} height={200}  className="w-100" src={imag} alt="product" style={{height:"400px"}} />
                 </figure>)}
             </Slider>

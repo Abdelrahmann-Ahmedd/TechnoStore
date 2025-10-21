@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/models/Product";
@@ -9,7 +9,7 @@ import { addProductToCart } from "@/store/slices/cartSlice";
 import { Button } from "../Ui/Button";
 import toast from "react-hot-toast";
 
-export default function Card(product: Product) {
+function OldCard(product: Product) {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.cart);
 
@@ -18,26 +18,30 @@ export default function Card(product: Product) {
     toast.success(`${product.title} added to cart`);
   };
 
+  const memoProduct = useMemo(()=>{
+    return product;
+  },[product])
+
   return (
     <div className="card" style={{ width: "18rem" }}>
-      <Link href={`/product/${product._id}`}>
+      <Link href={`/product/${memoProduct._id}`}>
         <figure className="w-100">
           <Image
             loading="lazy"
             style={{ width: "auto", height: "auto" }}
             width={300}
             height={300}
-            src={product.imageCover}
+            src={memoProduct.imageCover}
             className="card-img-top w-100"
-            alt={`Product image of ${product.title}`}
+            alt={`Product image of ${memoProduct.title}`}
           />
         </figure>
         <div className="card-body text-center h-75">
           <h4 className="card-title text-black">
-            {product.title.split(" ").slice(0, 2).join(" ")}
+            {memoProduct.title.split(" ").slice(0, 2).join(" ")}
           </h4>
-          <h6 className="card-title text-primary">{product.category.name}</h6>
-          <p className="card-text text-black">{product.price} EGP</p>
+          <h6 className="card-title text-primary">{memoProduct.category.name}</h6>
+          <p className="card-text text-black">{memoProduct.price} EGP</p>
         </div>
       </Link>
 
@@ -53,3 +57,5 @@ export default function Card(product: Product) {
     </div>
   );
 }
+
+export const Card = React.memo(OldCard);

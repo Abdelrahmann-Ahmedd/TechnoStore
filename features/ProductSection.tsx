@@ -3,19 +3,27 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import ProductList from "@/components/Product/ProductList";
-import React from "react";
+import React, { useMemo } from "react";
 import LoadingPage from "@/components/Layout/LoadingPage";
 
 function ProductSection() {
     const products = useSelector((state: RootState) => state.products.products);
     const loading = useSelector((state: RootState) => state.products.loading);
 
-    if (loading&&!products.length)
+    const memoProducts = useMemo(()=>{
+        return products;
+    },[products])
+
+    const memoMeta = useMemo(()=>{
+        return { currentPage: 1, totalPages: 1 }
+    },[])
+
+    if (loading&&!memoProducts.length)
         <LoadingPage />
 
     return (
         <section className="container">
-            <ProductList data={products} results={0}  metadata={{ currentPage: 1, totalPages: 1 }} />
+            <ProductList data={memoProducts} results={0}  metadata={memoMeta} />
         </section>
     );
 }

@@ -4,7 +4,7 @@ import { useAppSelector } from "@/store/hooks";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function SearchView({ query }: { query: string }) {
+function OldSearchView({ query }: { query: string }) {
   const { products } = useAppSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState<typeof products>([]);
   const [show, setShow] = useState(false);
@@ -55,3 +55,5 @@ export default function SearchView({ query }: { query: string }) {
     </div>
   );
 }
+
+export const SearchView = React.memo(OldSearchView); 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   fetchUserCart,
@@ -22,6 +22,12 @@ export default function CartView() {
     dispatch(fetchUserCart());
   }, [dispatch]);
 
+
+  const memoCart = useMemo(()=>{
+    return cart;
+  },[cart])
+
+
   if (loading) return <LoadingPage />;
 
   if (error)
@@ -31,7 +37,7 @@ export default function CartView() {
       </div>
     );
 
-  const products = cart?.data?.products ?? [];
+  const products = memoCart?.data?.products ?? [];
 
   if (products.length === 0)
     return (

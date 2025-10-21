@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUserOrders } from "@/store/slices/orderSlice";
 import { fetchUserCart } from "@/store/slices/cartSlice";
@@ -21,9 +21,13 @@ export default function OrderView() {
     if (cart?.data?.cartOwner) dispatch(fetchUserOrders(cart.data.cartOwner));
   }, [dispatch, cart]);
 
+  const memoOrders = useMemo(()=>{
+    return orders;
+  },[orders])
+
   if (loading || loadingCart) return <LoadingPage />;
   if (error) return <div className="text-center text-danger">{error}</div>;
-  if (!orders || orders.length === 0)
+  if (!memoOrders || memoOrders.length === 0)
     return <div className="text-center py-5 fs-5 text-muted">No orders found.</div>;
 
   return (
@@ -31,7 +35,7 @@ export default function OrderView() {
       <h1 className="text-center mb-4 fw-bold">My Orders</h1>
 
       <div className="d-flex flex-column gap-4">
-        {orders.map((order) => (
+        {memoOrders.map((order) => (
           <div
             key={order._id}
             className="p-3 rounded-3 shadow-sm border bg-white"

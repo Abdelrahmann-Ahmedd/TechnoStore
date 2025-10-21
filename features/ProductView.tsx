@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchProducts, fetchCategories } from "@/store/slices/productSlice";
 import { Category, Product } from "@/models/Product";
 import LoadingPage from "@/components/Layout/LoadingPage";
 import toast from "react-hot-toast";
-import Card from "@/components/Product/Card";
+import {Card} from "@/components/Product/Card";
 
 export default function ProductView() {
   const dispatch = useAppDispatch();
@@ -26,17 +26,18 @@ export default function ProductView() {
     dispatch(fetchProducts());
   }, [dispatch, selectedCategory, currentPage]);
 
-  if (loading) return <LoadingPage />;
-  if (error) {
-    toast.error(error);
-    return <div className="text-center text-danger p-4">{error}</div>;
-  }
+  const memoCategory = useMemo(()=>{
+    return categories;
+  },[categories])
 
+  const memoProduct = useMemo(()=>{
+    return products
+  },[products])
   // Filter products by category
   let filteredProducts: Product[] =
     selectedCategory === "all"
-      ? [...products]
-      : products.filter((p) => p.category._id === selectedCategory);
+      ? [...memoProduct]
+      : memoProduct.filter((p) => p.category._id === selectedCategory);
 
   // Sort products by price
   filteredProducts = [...filteredProducts].sort((a, b) =>
@@ -52,6 +53,15 @@ export default function ProductView() {
     currentPage * pageSize
   );
 
+
+
+  if (loading) return <LoadingPage />;
+  
+  if (error) {
+    toast.error(error);
+    return <div className="text-center text-danger p-4">{error}</div>;
+  }
+
   return (
     <div className="container my-5">
       {/* Filters */}
@@ -66,7 +76,7 @@ export default function ProductView() {
             }}
           >
             <option value="all">All</option>
-            {categories.map((cat: Category) => (
+            {memoCategory.map((cat: Category) => (
               <option key={cat._id} value={cat._id}>
                 {cat.name}
               </option>
