@@ -1,7 +1,10 @@
+import ProtectedAdminRoute from '@/features/ProtectedAdminRoute'
 import React from 'react'
 
 export default function  page() {
   return (
-    <div>home admin page</div>
+    <ProtectedAdminRoute>
+      <div>home admin page</div>
+    </ProtectedAdminRoute>
   )
 }
