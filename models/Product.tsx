@@ -110,6 +110,11 @@ export interface CartResponse {
   data: CartData;
 }
 
+export interface SearchModel {
+  product: Product;
+  setShow: (flag: boolean) => void;
+}
+
 export interface PaginatedData<T>{
   data: T[];
   results: number;

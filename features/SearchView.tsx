@@ -1,13 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/hooks";
-import Link from "next/link";
-import Image from "next/image";
+import SearchCard from "@/components/Product/SearchCard";
 
 function OldSearchView({ query }: { query: string }) {
   const { products } = useAppSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState<typeof products>([]);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false); 
 
   useEffect(() => {
     if (query.trim().length > 1) {
@@ -32,24 +31,7 @@ function OldSearchView({ query }: { query: string }) {
         <div className="text-center py-2 text-muted">No products found.</div>
       ) : (
         filteredProducts.map((p) => (
-          <Link
-            key={p._id}
-            href={`/product/${p._id}`}
-            className="d-flex align-items-center gap-2 text-decoration-none text-dark py-2 border-bottom"
-            onClick={() => setShow(false)}
-          >
-            <Image
-              src={p.imageCover}
-              alt={p.title}
-              width={40}
-              height={40}
-              className="rounded"
-            />
-            <div className="d-flex flex-column">
-              <span className="fw-semibold small">{p.title}</span>
-              <span className="text-muted small">{p.price} EGP</span>
-            </div>
-          </Link>
+          <SearchCard key={p._id} searchModel={{product:p,setShow}} />
         ))
       )}
     </div>
