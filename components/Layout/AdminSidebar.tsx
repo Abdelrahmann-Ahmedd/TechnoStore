@@ -19,21 +19,33 @@ export default function AdminSidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className="bg-body-tertiary text-black position-fixed start-0 h-100 z-0  p-3" style={{ width: "250px" }}>
-            <ul className="list-unstyled">
-                {links.map((link) => (
-                    <li key={link.href} className="mb-3">
-                        <Link
-                            href={link.href}
-                            className={`d-block text-decoration-none px-3 py-2 rounded ${
-                                pathname === link.href ? "bg-primary text-black" : "text-black"
-                            }`}
-                        >
-                            {link.name}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+        <aside
+        className="border-end bg-white position-fixed h-100 p-3 pt-5 shadow-sm"
+        style={{ width: "240px", top: 0, left: 0 }}
+        >
+        <h5 className="fw-bold fs-2 mb-4 text-primary ps-3">Dashboard</h5>
+
+        <ul className="list-unstyled">
+            {links.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+                <li key={link.href} className="mb-2">
+                <Link
+                    href={link.href}
+                    className={`d-block px-3 py-2 rounded-3 text-decoration-none 
+                    ${isActive ? "bg-primary text-white fw-semibold" : "text-dark"} 
+                    `}
+                    style={{
+                    transition: "0.2s",
+                    }}
+                >
+                    {link.name}
+                </Link>
+                </li>
+            );
+            })}
+        </ul>
         </aside>
     );
 }

@@ -6,11 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./globals.css";
 
-import Navbar from "@/components/Layout/Navbar";
-import Footer from "@/components/Layout/Footer";
-import ClientStoreProvider from "@/components/ClientSideProvider";
-import { Toaster } from "react-hot-toast";
-
 // Fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -65,21 +60,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} bg-light text-dark d-flex flex-column min-vh-100`}
         suppressHydrationWarning
       >
-        <ClientStoreProvider>
-          {/* Navbar */}
-          <header className="sticky-top shadow-sm bg-white">
-            <Navbar />
-          </header>
-
-          {/* Main Content */}
-          <main className="flex-grow-1">{children}</main>
-
-          {/* Footer */}
-          <Footer />
-
-          {/* Toast Notifications */}
-          <Toaster position="top-center" reverseOrder={false} />
-        </ClientStoreProvider>
+      {children}
       </body>
     </html>
   );
