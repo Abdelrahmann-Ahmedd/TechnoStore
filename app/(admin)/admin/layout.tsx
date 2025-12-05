@@ -17,7 +17,7 @@ export default function AdminLayout({
       <main
         className="flex-grow-1"
         style={{
-          padding: "30px",
+          padding: "10px",
           minHeight: "100vh",
           backgroundColor: "#f8f9fa",
         }}
