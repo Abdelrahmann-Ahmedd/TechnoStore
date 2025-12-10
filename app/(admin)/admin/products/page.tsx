@@ -1,7 +1,33 @@
-import React from 'react'
+"use client";
+import LoadingPage from '@/components/Layout/LoadingPage';
+import { PaginationPage } from '@/components/Product/PageNumber';
+import ProductList from '@/components/Product/ProductList';
+import { AppDispatch, RootState } from '@/store';
+import {fetchProducts } from '@/store/slices/productSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function  page() {
+export default function  AdminProducts() {
+
+  const dispatch = useDispatch<AppDispatch>(); 
+  const {products, loading } = useSelector((state: RootState) => state.products);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  useEffect(() => {
+      dispatch(fetchProducts());
+  }, [dispatch, currentPage]);
+
+  const paginatedProducts = products.slice(
+      (currentPage - 1) * 12,
+      currentPage * 12
+  );
+
+  if (loading) return <LoadingPage />;
+
   return (
-    <div>admin product page</div>
+    <>
+      <h2 className='fs-1 text-center p-4'>All Products</h2>
+      <ProductList data={paginatedProducts} results={0}/>
+      <PaginationPage currentPage={currentPage} products={products} setCurrentPage={setCurrentPage}/>
+    </>
   )
 }

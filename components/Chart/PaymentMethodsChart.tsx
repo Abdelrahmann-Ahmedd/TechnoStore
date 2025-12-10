@@ -41,7 +41,7 @@ export default function PaymentMethodsChart() {
     };
 
     return (
-        <div className="bg-white p-3 rounded-3 shadow-sm" style={{ height: 340 }}>
+        <div className="bg-white p-3 rounded-3 shadow-sm mb-2" style={{ height: 340 }}>
             <h5 className="mb-3">Payment Methods</h5>
             <Pie data={data} options={options} />
         </div>

@@ -26,7 +26,7 @@ export default  React.memo(function RevenueChart() {
     };
     
     return (
-        <div className="bg-white p-3 rounded-3 shadow-sm">
+        <div className="bg-white p-3 rounded-3 shadow-sm mb-3">
             <h5 className="mb-3">Revenue Over Time</h5>
             <Line data={data} options={options} />
         </div>

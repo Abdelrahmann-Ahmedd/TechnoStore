@@ -40,7 +40,7 @@ export default function SalesByCategoryChart() {
     };
 
     return (
-        <div className="bg-white p-3 rounded-3 shadow-sm" style={{ height: 350 }}>
+        <div className="bg-white p-3 rounded-3 shadow-sm mb-3" style={{ height: 350 }}>
         <h5 className="mb-3">Sales by Category</h5>
         <Bar data={data} options={options} />
         </div>

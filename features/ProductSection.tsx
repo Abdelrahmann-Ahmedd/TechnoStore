@@ -23,6 +23,7 @@ function ProductSection() {
 
     return (
         <section className="container">
+            <h2 className="fs-1 mb-3">Best Selling</h2>
             <ProductList data={memoProducts} results={0}  metadata={memoMeta} />
         </section>
     );

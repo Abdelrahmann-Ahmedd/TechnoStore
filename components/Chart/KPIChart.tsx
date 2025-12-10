@@ -3,7 +3,7 @@ import KPI from '../Ui/KPI'
 
 export default function KPIChart() {
     return (
-            <section className="container py-4">
+    <section className="container py-4">
         <div className="row g-4">
             <div className="col-xl-3 col-lg-4 col-md-6">
             <KPI icon='fa-solid fa-dollar-sign' title="Total Revenue" color="#FFB100" data={20000} />
@@ -21,6 +21,6 @@ export default function KPIChart() {
             <KPI icon='fa-solid fa-hourglass-end' title="Pending Orders" color="#DC3545" data={32} />
             </div>
         </div>
-        </section>
+    </section>
     )
 }

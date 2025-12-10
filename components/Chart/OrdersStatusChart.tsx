@@ -53,7 +53,7 @@ export default function OrdersStatusChart() {
     };
 
     return (
-        <div className="bg-white p-3 rounded-3 shadow-sm" style={{ height: 330 }}>
+        <div className="bg-white p-3 rounded-3 shadow-sm mb-2" style={{ height: 330 }}>
             <h5 className="mb-3">Orders by Status</h5>
             <Doughnut data={data} options={options} />
         </div>

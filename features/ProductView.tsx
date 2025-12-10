@@ -6,7 +6,8 @@ import { fetchProducts, fetchCategories } from "@/store/slices/productSlice";
 import { Category, Product } from "@/models/Product";
 import LoadingPage from "@/components/Layout/LoadingPage";
 import toast from "react-hot-toast";
-import {Card} from "@/components/Product/Card";
+import { PaginationPage } from "@/components/Product/PageNumber";
+import ProductList from "@/components/Product/ProductList";
 
 export default function ProductView() {
   const dispatch = useAppDispatch();
@@ -44,8 +45,7 @@ export default function ProductView() {
     sortOrder === "asc" ? a.price - b.price : b.price - a.price
   );
 
-  // Calculate total pages
-  const totalPages = Math.ceil(filteredProducts.length / pageSize);
+
 
   // Paginate products
   const paginatedProducts = filteredProducts.slice(
@@ -84,17 +84,13 @@ export default function ProductView() {
           </select>
         </div>
       <div className="row mb-4 align-items-center">
-
-
         {/* Sort - Right side of category */}
-        <div className="col-md-12 d-flex justify-content-center justify-content-md-end align-items-center mt-3 mt-md-0">
+        <div onClick={() =>
+              setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+            } style={{cursor:"pointer"}} className="col-md-12 d-flex justify-content-center justify-content-md-end align-items-center mt-3 mt-md-0">
           <h5 className="ms-auto mb-0">Sort</h5>
           <i
-            style={{cursor:"pointer"}}
             className={`fa-solid text-primary fa-filter fa-lg cursor-pointer`}
-            onClick={() =>
-              setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-            }
             title={sortOrder === "asc" ? "Low to High" : "High to Low"}
           ></i>
         </div>
@@ -102,14 +98,7 @@ export default function ProductView() {
 
       {/* Products Grid */}
       <div className="row g-4">
-        {paginatedProducts.map((product) => (
-          <div
-            key={product._id}
-            className="col-12 col-xl-3 col-md-6 col-lg-4 d-flex justify-content-center"
-          >
-            <Card {...product} />
-          </div>
-        ))}
+        <ProductList data={paginatedProducts} results={0}/>
         {paginatedProducts.length === 0 && (
           <div className="col-12 text-center py-5">
             <h4>No products found in this category.</h4>
@@ -117,24 +106,7 @@ export default function ProductView() {
         )}
       </div>
 
-      {/* Pagination */}
-      <nav className="mt-4">
-        <ul className="pagination justify-content-center">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <li
-              key={page}
-              className={`page-item ${currentPage === page ? "active" : ""}`}
-            >
-              <button
-                className="page-link"
-                onClick={() => setCurrentPage(page)}
-              >
-                {page}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <PaginationPage products={products} currentPage={currentPage} setCurrentPage={setCurrentPage}/>  
     </div>
   );
 }

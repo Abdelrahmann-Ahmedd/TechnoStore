@@ -9,7 +9,7 @@ export default function  page() {
   return (
     <>
       <h2 className='text-center fw-bold'>Dashboard</h2>
-      <section className="container py-4">
+      <section className="container p-0 py-1">
         <div className="row g-3">
           <KPIChart />
         </div>
