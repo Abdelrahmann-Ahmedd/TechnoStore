@@ -10,6 +10,23 @@ export const loginSchema = Yup.object({
     .required("Password is Required."),
 })
 
+export const AddProductSchema = Yup.object({
+    id: Yup.number().required("Id is Required.") ,
+    title: Yup.string()
+    .required("Title is Required")
+    .min(10,"title must be at least 10 characters."),
+    price: Yup.number()
+    .required("price is Required"),
+    describtion: Yup.string()
+    .min(24,"Description must be at least 24 characters.")
+    .required("Description is Required."),
+    category: Yup.string()
+    .required("Category is Required."),
+    image: Yup.string()
+    .required("image url is Required.")
+    .url("enter a valid URL."),
+})
+
 export const registerSchema = Yup.object({
     name: Yup.string()
     .min(3,"Name must be at least 3 characters.")

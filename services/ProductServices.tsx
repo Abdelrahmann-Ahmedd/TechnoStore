@@ -12,8 +12,6 @@ export const ProductServices = {
             method: "GET",
         }),
 
-
-
     getAllBrands: () =>
         apiCall({
             url: BRAND_BASE,
@@ -25,6 +23,13 @@ export const ProductServices = {
             url: `${BASE_URL}/${id}`,
             method: "GET",
         }),
+    
+    addProduct: (body: object) =>
+    apiCall({
+        url: `https://fakestoreapi.com/products`,
+        method: "POST",
+        data: body
+    }),
 
     getAllCategories: () =>
         apiCall({
