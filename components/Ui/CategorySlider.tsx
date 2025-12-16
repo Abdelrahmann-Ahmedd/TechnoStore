@@ -69,8 +69,11 @@ function CategorySlider({ data }: PaginatedData<Category>) {
           color: #0d6efd;
           font-size: 25px;
         }
+        .category-card {
+          transition: all 0.3s;
+        }
         .category-card:hover {
-          transform: translateY(-6px);
+          transform: translateY(-15px);
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
         .image-wrapper {

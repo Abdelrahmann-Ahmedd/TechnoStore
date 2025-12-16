@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 // Metadata (SEO)
 export const metadata: Metadata = {
   title: {
-    default: "MyStore | Your Trusted Online Shop",
+    default: "TechnoStore | Your Trusted Online Shop",
     template: "%s | MyStore",
   },
   description:
