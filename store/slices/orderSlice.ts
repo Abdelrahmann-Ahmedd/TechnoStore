@@ -30,6 +30,20 @@ export const fetchUserOrders = createAsyncThunk(
   }
 );
 
+export const fetchAllOrders = createAsyncThunk(
+  "orders/fetchAllOrders",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const { data, error } = await OrderServices.getAllOrders();
+      if (error) return rejectWithValue(error);
+      return data as Order[];
+    } catch (err) {
+        const axiosError = err as AxiosError<{ message: string }>;
+      return rejectWithValue(axiosError.response?.data?.message || "Failed to fetch orders");
+    }
+  }
+);
+
 export const createCheckoutSession = createAsyncThunk(
   "orders/createCheckoutSession",
   async ({cartId,body}: {cartId:string , body:object}, { rejectWithValue }) => {
@@ -59,6 +73,18 @@ const orderSlice = createSlice({
         state.orders = action.payload;
       })
       .addCase(fetchUserOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchAllOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllOrders.fulfilled, (state, action: PayloadAction<Order[]>) => {
+        state.loading = false;
+        state.orders = action.payload;
+      })
+      .addCase(fetchAllOrders.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
