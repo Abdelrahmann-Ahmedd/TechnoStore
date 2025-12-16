@@ -9,9 +9,10 @@ type SidebarLink = {
 };
 const links: SidebarLink[] = [
     { name: "Dashboard", href: "/admin" },
+    { name: "Home", href: "/" },
     { name: "Products", href: "/admin/products" },
     { name: "Orders", href: "/admin/order" },
-    { name: "Users", href: "/admin/user" },
+    // { name: "Users", href: "/admin/user" },
 ];
 
 export default function AdminSidebar() {

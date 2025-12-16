@@ -1,19 +1,22 @@
 // store/slices/orderSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import {OrderServices} from "../../services/OrderServices";
-import { Order } from "@/models/Order";
+import { AllOrders, Order } from "@/models/Order";
 import { AxiosError } from "axios";
+import { PaginatedData } from "@/models/Product";
 
 interface OrderState {
   orders: Order[];
   loading: boolean;
   error: string | null;
+  allOrders: AllOrders[];
 }
 
 const initialState: OrderState = {
   orders: [],
   loading: false,
   error: null,
+  allOrders: []
 };
 
 export const fetchUserOrders = createAsyncThunk(
@@ -30,19 +33,28 @@ export const fetchUserOrders = createAsyncThunk(
   }
 );
 
-export const fetchAllOrders = createAsyncThunk(
+export const fetchAllOrders = createAsyncThunk<
+  AllOrders[],
+  void,
+  { rejectValue: string }
+>(
   "orders/fetchAllOrders",
-  async (userId: string, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const { data, error } = await OrderServices.getAllOrders();
-      if (error) return rejectWithValue(error);
-      return data as Order[];
+      const res = await OrderServices.getAllOrders();
+
+      if (res.error) return rejectWithValue(res.error);
+
+      return res.data!.data;
     } catch (err) {
-        const axiosError = err as AxiosError<{ message: string }>;
-      return rejectWithValue(axiosError.response?.data?.message || "Failed to fetch orders");
+      const axiosError = err as AxiosError<{ message: string }>;
+      return rejectWithValue(
+        axiosError.response?.data?.message || "Failed to fetch orders"
+      );
     }
   }
 );
+
 
 export const createCheckoutSession = createAsyncThunk(
   "orders/createCheckoutSession",
@@ -80,9 +92,9 @@ const orderSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAllOrders.fulfilled, (state, action: PayloadAction<Order[]>) => {
+      .addCase(fetchAllOrders.fulfilled, (state, action: PayloadAction<AllOrders[]>) => {
         state.loading = false;
-        state.orders = action.payload;
+        state.allOrders = action.payload;
       })
       .addCase(fetchAllOrders.rejected, (state, action) => {
         state.loading = false;
@@ -103,3 +115,4 @@ const orderSlice = createSlice({
 });
 
 export default orderSlice.reducer;
+

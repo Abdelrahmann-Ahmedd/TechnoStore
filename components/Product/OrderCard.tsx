@@ -1,7 +1,7 @@
-import { Order } from '@/models/Order'
+import { AllOrders, Order } from '@/models/Order'
 import Image from 'next/image'
 
-export default function OrderCard({order}: {order:Order}) {
+export default function OrderCard({order}: {order:Order | AllOrders}) {
 
 
     return (
