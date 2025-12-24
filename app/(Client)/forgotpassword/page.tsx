@@ -1,5 +1,4 @@
 import ForgetPassword from '@/features/ForgetPassword'
-import React from 'react'
 
 export default function page() {
   return (

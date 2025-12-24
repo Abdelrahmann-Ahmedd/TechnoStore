@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchAllOrders } from "@/store/slices/orderSlice";
 import LoadingPage from "@/components/Layout/LoadingPage";
-import OrderCard from "@/components/Product/OrderCard";
+import {OrderCard} from "@/components/Product/OrderCard";
 
 export default function AllOrder() {
   const dispatch = useAppDispatch();

@@ -1,5 +1,4 @@
 import AddProductForm from '@/features/AddProductForm'
-import React from 'react'
 
 export default function AddProduct() {
     return (

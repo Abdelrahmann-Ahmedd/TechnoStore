@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { fetchBrands, fetchCategories, fetchProducts } from "@/store/slices/productSlice";

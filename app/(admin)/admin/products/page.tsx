@@ -1,7 +1,7 @@
 "use client";
 import LoadingPage from '@/components/Layout/LoadingPage';
 import { PaginationPage } from '@/components/Product/PageNumber';
-import ProductList from '@/components/Product/ProductList';
+import {ProductList} from '@/components/Product/ProductList';
 import { AppDispatch, RootState } from '@/store';
 import {fetchProducts } from '@/store/slices/productSlice';
 import Link from 'next/link';

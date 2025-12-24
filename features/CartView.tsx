@@ -10,7 +10,7 @@ import LoadingPage from "@/components/Layout/LoadingPage";
 import { Button } from "@/components/Ui/Button";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import CartCard from "@/components/Product/CartCard";
+import {CartCard} from "@/components/Product/CartCard";
 
 export default function CartView() {
   const dispatch = useAppDispatch();
