@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   fetchUserCart,
@@ -16,14 +16,16 @@ export default function CartView() {
   const dispatch = useAppDispatch();
   const { cart, loading, error } = useAppSelector((state) => state.cart);
   
+  const handleClearCart = useCallback(() => {
+    dispatch(clearUserCart());
+    toast('Cart cleared', { icon: '🗑' });
+    },[dispatch])
+  
   useEffect(() => {
     dispatch(fetchUserCart());
   }, [dispatch]);
 
 
-  const memoCart = useMemo(()=>{
-    return cart;
-  },[cart])
 
 
   if (loading) return <LoadingPage />;
@@ -35,7 +37,7 @@ export default function CartView() {
       </div>
     );
 
-  const products = memoCart?.data?.products ?? [];
+  const products = cart?.data?.products ?? [];
 
   if (products.length === 0)
     return (
@@ -63,10 +65,7 @@ export default function CartView() {
         <div className="col-12 col-md-6 text-md-end mt-2 mt-md-0">
           <button
             className="btn btn-danger"
-            onClick={() => {
-              dispatch(clearUserCart());
-              toast('Cart cleared', { icon: '🗑' });
-            }}
+            onClick={handleClearCart}
           >
             🗑 Clear Cart
           </button>

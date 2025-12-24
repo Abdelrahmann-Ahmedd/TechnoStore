@@ -27,33 +27,21 @@ export default function ProductView() {
     dispatch(fetchProducts());
   }, [dispatch, selectedCategory, currentPage]);
 
-  const memoCategory = useMemo(()=>{
-    return categories;
-  },[categories])
-
-  const memoProduct = useMemo(()=>{
-    return products
-  },[products])
-  // Filter products by category
-  let filteredProducts: Product[] =
-    selectedCategory === "all"
-      ? [...memoProduct]
-      : memoProduct.filter((p) => p.category._id === selectedCategory);
-
-  // Sort products by price
-  filteredProducts = [...filteredProducts].sort((a, b) =>
-    sortOrder === "asc" ? a.price - b.price : b.price - a.price
-  );
+  const filteredProducts = useMemo(() => {
+    let result = products;
+    if (selectedCategory !== "all") {
+      result = result.filter(p => p.category._id === selectedCategory);
+    }
+    return [...result].sort((a, b) =>
+      sortOrder === "asc" ? a.price - b.price : b.price - a.price
+    );
+  }, [products, selectedCategory, sortOrder]);
 
 
-
-  // Paginate products
-  const paginatedProducts = filteredProducts.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
-
-
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage-1) * pageSize;
+    return filteredProducts.slice(start, start+pageSize);
+  }, [filteredProducts, currentPage]);
 
   if (loading) return <LoadingPage />;
   
@@ -76,7 +64,7 @@ export default function ProductView() {
             }}
           >
             <option value="all">All</option>
-            {memoCategory.map((cat: Category) => (
+            {categories.map((cat: Category) => (
               <option key={cat._id} value={cat._id}>
                 {cat.name}
               </option>

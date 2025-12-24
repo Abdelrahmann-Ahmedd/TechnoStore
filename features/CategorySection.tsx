@@ -10,10 +10,6 @@ function CategorySection() {
     const categories = useSelector((state: RootState) => state.products.categories);
     const loading = useSelector((state: RootState) => state.products.loading);
 
-    const memoCategories = useMemo(()=>{
-        return categories;
-    },[categories])
-
 
     const memoMetaData = useMemo(()=>{
         return {
@@ -24,13 +20,12 @@ function CategorySection() {
             };
     },[]);
 
-    if(loading && !categories.length)
-        <LoadingPage />
+    if(loading && !categories.length) return <LoadingPage />
 
     return (
         <section className="container my-5">
             <h2 className="fs-1 mb-3">Category</h2>
-            <CategorySlider results={3} data={memoCategories} metadata={memoMetaData} />
+            <CategorySlider results={3} data={categories} metadata={memoMetaData} />
         </section>
     );
 }

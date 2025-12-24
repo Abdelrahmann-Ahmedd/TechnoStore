@@ -10,21 +10,16 @@ function ProductSection() {
     const products = useSelector((state: RootState) => state.products.products);
     const loading = useSelector((state: RootState) => state.products.loading);
 
-    const memoProducts = useMemo(()=>{
-        return products;
-    },[products])
-
     const memoMeta = useMemo(()=>{
         return { currentPage: 1, totalPages: 1 }
     },[])
 
-    if (loading&&!memoProducts.length)
-        <LoadingPage />
+    if (loading&&!products.length) return <LoadingPage />
 
     return (
         <section className="container">
             <h2 className="fs-1 mb-3">Best Selling</h2>
-            <ProductList data={memoProducts} results={0}  metadata={memoMeta} />
+            <ProductList data={products} results={0}  metadata={memoMeta} />
         </section>
     );
 }

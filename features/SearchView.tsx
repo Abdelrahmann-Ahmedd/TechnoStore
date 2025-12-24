@@ -1,24 +1,35 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useAppSelector } from "@/store/hooks";
-import {SearchCard} from "@/components/Product/SearchCard";
 
-function OldSearchView({ query }: { query: string }) {
+import React, { useEffect, useMemo, useState } from "react";
+import { useAppSelector } from "@/store/hooks";
+import { SearchCard } from "@/components/Product/SearchCard";
+
+interface SearchViewProps {
+  query: string;
+}
+
+export const SearchView: React.FC<SearchViewProps> = React.memo(({ query }) => {
   const { products } = useAppSelector((state) => state.products);
-  const [filteredProducts, setFilteredProducts] = useState<typeof products>([]);
-  const [show, setShow] = useState(false); 
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (query.trim().length > 1) {
-      const filtered = products.filter((p) =>
-        p.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredProducts(filtered.slice(0, 6)); // show up to 6 results
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  }, [query, products]);
+    const handler = setTimeout(() => setDebouncedQuery(query), 400);
+    return () => clearTimeout(handler);
+  }, [query]);
+
+  const filteredProducts = useMemo(() => {
+    if (debouncedQuery.trim().length <= 1) return [];
+    return products
+      .filter((p) =>
+        p.title.toLowerCase().includes(debouncedQuery.toLowerCase())
+      )
+      .slice(0, 6);
+  }, [products, debouncedQuery]);
+
+  useEffect(() => {
+    setShow(filteredProducts.length > 0 || debouncedQuery.trim().length > 1);
+  }, [filteredProducts, debouncedQuery]);
 
   if (!show) return null;
 
@@ -31,11 +42,9 @@ function OldSearchView({ query }: { query: string }) {
         <div className="text-center py-2 text-muted">No products found.</div>
       ) : (
         filteredProducts.map((p) => (
-          <SearchCard key={p._id} searchModel={{product:p,setShow}} />
+          <SearchCard key={p._id} searchModel={{ product: p, setShow }} />
         ))
       )}
     </div>
   );
-}
-
-export const SearchView = React.memo(OldSearchView); 
+});
