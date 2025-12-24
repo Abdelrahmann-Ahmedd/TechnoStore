@@ -16,7 +16,7 @@ function BrandSection() {
 
     return (
         <section className="main container my-3">
-            <Carousel images={brands.map((brand) => brand.image)} />
+            <Carousel images={brands.map((brand,ind) => brand.image)} />
         </section>
     );
 }

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React, { useCallback } from 'react'
 import toast from 'react-hot-toast';
 
-function OldCartCard({item}:{item:CartItem}) {
+function OldCartCard({item,index}:{item:CartItem,index:number}) {
 
     const dispatch = useAppDispatch();
     const handleDecrease = useCallback(() => {
@@ -40,7 +40,8 @@ function OldCartCard({item}:{item:CartItem}) {
                 src={item.product.imageCover}
                 alt={item.product.title}
                 className="w-50 img-fluid rounded"
-                loading="lazy"
+                priority={index < 5}
+                loading={index < 5 ? "eager" : "lazy"}
                 width={200}
                 height={200}
                 />

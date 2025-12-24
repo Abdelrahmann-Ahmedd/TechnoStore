@@ -45,7 +45,7 @@ function CategorySlider({ data }: PaginatedData<Category>) {
   return (
     <div className="slider-container w-100 py-4">
       <Slider ref={sliderRef} {...settings}>
-        {memoData.map((cat) => (
+        {memoData.map((cat,ind) => (
           <div key={cat._id} className="px-3">
             <div className="category-card text-center rounded-4 shadow-sm border border-light-subtle p-3 bg-white h-100 d-flex flex-column justify-content-center align-items-center">
               <div className="image-wrapper mb-2">
@@ -54,6 +54,8 @@ function CategorySlider({ data }: PaginatedData<Category>) {
                   height={200}
                   src={cat.image}
                   alt={cat.name}
+                  priority={ind === 0}
+                  loading={ind === 0 ? "eager" : "lazy"}
                   className="category-img rounded-circle"
                 />
               </div>

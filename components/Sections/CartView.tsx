@@ -53,8 +53,8 @@ export default function CartView() {
     <div className="container my-5">
       <h1 className="text-center mb-5">🛒 Your Cart</h1>
 
-      {products.map((item) => (
-        <CartCard key={item._id} item={item} />
+      {products.map((item,ind) => (
+        <CartCard key={item._id} item={item} index={ind} />
       ))}
 
       <div className="row mt-4 pt-3 border-top align-items-center">

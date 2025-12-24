@@ -9,7 +9,7 @@ import { addProductToCart } from "@/store/slices/cartSlice";
 import { Button } from "../Ui/Button";
 import toast from "react-hot-toast";
 
-function OldCard(product: Product) {
+function OldCard({product,index}:{product: Product, index: number}) {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.cart);
 
@@ -23,7 +23,8 @@ function OldCard(product: Product) {
       <Link href={`/product/${product._id}`}>
         <figure className="w-100">
           <Image
-            loading="lazy"
+            priority={index < 4}
+            loading={index < 8 ? "eager" : "lazy"}
             style={{ width: "auto", height: "auto" }}
             width={300}
             height={300}
