@@ -92,6 +92,69 @@ body {
   transform: translateY(-20%);
 }
 
+/*Skeleton Effect*/
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #eee 25%,
+    #f5f5f5 37%,
+    #eee 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+.skeleton-img {
+  height: 400px;
+  width: 100%;
+}
+
+.skeleton-text {
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton-text.small {
+  width: 60%;
+}
+
+.skeleton-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+}
+
+.skeleton-text.small {
+  height: 12px;
+  width: 60px;
+}
+
+.skeleton-carousel {
+  height: 400px;
+  border-radius: 8px;
+    background: linear-gradient(
+    90deg,
+    #eee 25%,
+    #f5f5f5 37%,
+    #eee 63%
+  );
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+
 /*Admin Part*/
 .kpi-card {
   transition: transform .2s ease, box-shadow .2s ease;

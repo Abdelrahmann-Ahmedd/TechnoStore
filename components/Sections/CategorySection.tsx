@@ -5,6 +5,7 @@ import { RootState } from "@/store";
 import CategorySlider from "@/components/Ui/CategorySlider";
 import React, { useMemo } from "react";
 import LoadingPage from "@/components/Layout/LoadingPage";
+import { CategorySliderSkeleton } from "../Ui/CategoryCardSkeleton";
 
 function CategorySection() {
     const categories = useSelector((state: RootState) => state.products.categories);
@@ -20,12 +21,15 @@ function CategorySection() {
             };
     },[]);
 
-    if(loading && !categories.length) return <LoadingPage />
 
     return (
         <section className="container my-5">
             <h2 className="fs-1 mb-3">Category</h2>
-            <CategorySlider results={3} data={categories} metadata={memoMetaData} />
+            {loading&&categories.length===0?(
+                <CategorySliderSkeleton />
+            ):(
+                <CategorySlider results={3} data={categories} metadata={memoMetaData} />
+            )}
         </section>
     );
 }

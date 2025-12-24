@@ -5,6 +5,7 @@ import { RootState } from "@/store";
 import {ProductList} from "@/components/Product/ProductList";
 import React, { useMemo } from "react";
 import LoadingPage from "@/components/Layout/LoadingPage";
+import ProductCardSkeleton from "../Ui/ProductCardSkeleton";
 
 function ProductSection() {
     const products = useSelector((state: RootState) => state.products.products);
@@ -14,12 +15,14 @@ function ProductSection() {
         return { currentPage: 1, totalPages: 1 }
     },[])
 
-    if (loading&&!products.length) return <LoadingPage />
-
     return (
         <section className="container">
             <h2 className="fs-1 mb-3">Best Selling</h2>
-            <ProductList data={products} results={0}  metadata={memoMeta} />
+            {loading&&products.length===0?(
+                <ProductCardSkeleton />
+            ):(
+                <ProductList data={products} results={0}  metadata={memoMeta} />
+            )}
         </section>
     );
 }
