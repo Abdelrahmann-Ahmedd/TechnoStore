@@ -5,7 +5,7 @@ import React from "react";
 
 function OldOrderCard({ order, index }: { order: Order | AllOrders, index: number }) {
     return (
-        <div className="p-3 rounded-3 shadow-sm border bg-white mb-3">
+        <div className="p-3 rounded-3 shadow-sm border bg-white mb-3 overflow-hidden">
             <div className="row g-3 align-items-start">
 
                 {/* Order ID */}
@@ -41,7 +41,7 @@ function OldOrderCard({ order, index }: { order: Order | AllOrders, index: numbe
                             className="fw-semibold small text-truncate"
                             title={item.product.title}
                         >
-                            {item.product.title}
+                            {item.product.title.split(" ").slice(0.8).join(" ")}
                         </div>
                         <div className="text-muted small">× {item.count}</div>
                         </div>
