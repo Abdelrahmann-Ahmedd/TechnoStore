@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { fetchBrands, fetchCategories, fetchProducts } from "@/store/slices/productSlice";
 import { setToken } from "@/store/slices/authSlice";
-import { BrandView } from "@/features/BrandSection";
-import { CategoryView } from "@/features/CategorySection";
-import { ProductView } from "@/features/ProductSection";
+import { BrandView } from "@/components/Sections/BrandSection";
+import { CategoryView } from "@/components/Sections/CategorySection";
+import { ProductView } from "@/components/Sections/ProductSection";
 
 export default function Home() {
     const dispatch = useDispatch<AppDispatch>();

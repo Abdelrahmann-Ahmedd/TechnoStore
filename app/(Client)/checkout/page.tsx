@@ -1,4 +1,4 @@
-import CheckoutView from '@/features/CheckoutView'
+import CheckoutView from '@/components/Sections/CheckoutView'
 import ProtectedRoute from '@/features/ProtectedRoute'
 import React from 'react'
 

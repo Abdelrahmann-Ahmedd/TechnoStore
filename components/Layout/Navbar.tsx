@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 "use client";
 import Link from "next/link";
 import Button from "../Ui/Button";
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { logout, setToken } from "@/store/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import {SearchView} from "@/features/SearchView";
+import {SearchView} from "@/components/Sections/SearchView";
 
 export default function Navbar() {
   const dispatch = useDispatch<AppDispatch>();

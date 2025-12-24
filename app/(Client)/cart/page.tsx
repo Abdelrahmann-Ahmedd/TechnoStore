@@ -1,4 +1,4 @@
-import CartView from '@/features/CartView'
+import CartView from '@/components/Sections/CartView'
 import ProtectedRoute from '@/features/ProtectedRoute'
 
 export default function cartPage() {

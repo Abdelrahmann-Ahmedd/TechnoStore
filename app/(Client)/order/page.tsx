@@ -1,6 +1,5 @@
-import OrderView from '@/features/OrderView'
+import OrderView from '@/components/Sections/OrderView'
 import ProtectedRoute from '@/features/ProtectedRoute'
-import React from 'react'
 
 export default function page() {
   return (
