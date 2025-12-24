@@ -36,7 +36,7 @@ function CategorySlider({ data }: PaginatedData<Category>) {
     slidesToShow,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     arrows: true,
     swipeToSlide: true,
     pauseOnHover: true,

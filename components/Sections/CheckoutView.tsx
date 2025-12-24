@@ -164,8 +164,8 @@ export default function CheckoutView() {
                 </tr>
               </thead>
               <tbody>
-                {cart.data.products.map(item => (
-                  <CheckoutCard key={item._id} item={item} />
+                {cart.data.products.map((item,ind) => (
+                  <CheckoutCard key={item._id} item={item} index={ind} />
                 ))}
               </tbody>
             </table>

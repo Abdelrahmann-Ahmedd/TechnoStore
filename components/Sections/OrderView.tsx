@@ -32,8 +32,8 @@ export default function OrderView() {
       <h1 className="text-center mb-4 fw-bold">My Orders</h1>
 
       <div className="d-flex flex-column gap-4">
-        {orders.map((order) => (
-          <OrderCard key={order._id} order={order} />
+        {orders.map((order,ind) => (
+          <OrderCard key={order._id} order={order} index={ind} />
         ))}
       </div>
     </div>

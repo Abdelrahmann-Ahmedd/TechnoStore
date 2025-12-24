@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 
-function OldOrderCard({ order }: { order: Order | AllOrders }) {
+function OldOrderCard({ order, index }: { order: Order | AllOrders, index: number }) {
     return (
         <div className="p-3 rounded-3 shadow-sm border bg-white mb-3">
             <div className="row g-3 align-items-start">
@@ -28,7 +28,8 @@ function OldOrderCard({ order }: { order: Order | AllOrders }) {
                         style={{ width: 60, height: 60, position: "relative" }}
                         >
                         <Image
-                            loading="lazy"
+                            priority={index < 5}
+                            loading={index < 5 ? "eager" : "lazy"}
                             fill
                             style={{ objectFit: "cover", borderRadius: "0.5rem" }}
                             src={item.product.imageCover}

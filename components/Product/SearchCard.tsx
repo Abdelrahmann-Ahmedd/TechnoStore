@@ -18,6 +18,7 @@ function OldSearchCard({searchModel}:{searchModel:SearchModel}) {
                 width={40}
                 height={40}
                 className="rounded"
+                priority
             />
             <div className="d-flex flex-column">
                 <span className="fw-semibold small">{searchModel.product.title}</span>

@@ -7,7 +7,7 @@ function SimpleSlider({images}:{images:string[]}) {
     const settings = {
         dots: false,
         autoplay: true,
-        autoplaySpeed: 2500,
+        autoplaySpeed: 5000,
         infinite: true,
         speed: 2000,
         slidesToShow: 1,
@@ -22,7 +22,15 @@ function SimpleSlider({images}:{images:string[]}) {
         <div className="slider-container ">
             <Slider {...settings}>
                 {memoImages.map((imag,ind)=> <figure key={ind} className="">
-                    <Image priority width={200} height={200}  className="w-100" src={imag} alt="product" style={{height:"400px"}} />
+                    <Image 
+                        priority={ind === 0}
+                        loading={ind === 0 ? "eager" : "lazy"} 
+                        width={200} 
+                        height={200}  
+                        className="w-100" 
+                        src={imag} 
+                        alt="product" 
+                        style={{height:"400px"}} />
                 </figure>)}
             </Slider>
         </div>

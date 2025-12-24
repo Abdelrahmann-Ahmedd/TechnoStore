@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 
 
-function OldCheckoutCard({item}:{item:CartItem}) {
+function OldCheckoutCard({item,index}:{item:CartItem,index: number}) {
     return (
         <tr>
             <td className="d-flex align-items-center gap-2">
@@ -13,7 +13,8 @@ function OldCheckoutCard({item}:{item:CartItem}) {
                 alt={item.product.title}
                 width={50}
                 height={50}
-                loading = "lazy"
+                priority={index < 5}
+                loading={index < 5 ? "eager" : "lazy"}
                 />
                 <span>{item.product.title}</span>
             </td>
