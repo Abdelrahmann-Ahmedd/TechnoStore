@@ -7,7 +7,7 @@ import { createCheckoutSession, fetchUserOrders } from "@/store/slices/orderSlic
 import { OrderServices } from "@/services/OrderServices";
 import LoadingPage from "@/components/Layout/LoadingPage";
 import toast from "react-hot-toast";
-import CheckoutCard from "@/components/Product/CheckoutCard";
+import {CheckoutCard} from "@/components/Product/CheckoutCard";
 import { useRouter } from "next/navigation";
 
 interface ShippingForm {

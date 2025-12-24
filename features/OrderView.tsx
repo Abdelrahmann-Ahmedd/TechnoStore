@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUserOrders } from "@/store/slices/orderSlice";
 import { fetchUserCart } from "@/store/slices/cartSlice";
 import LoadingPage from "@/components/Layout/LoadingPage";
-import OrderCard from "@/components/Product/OrderCard";
+import {OrderCard} from "@/components/Product/OrderCard";
 
 export default function OrderView() {
   const dispatch = useAppDispatch();
