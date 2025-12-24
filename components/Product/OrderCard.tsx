@@ -1,7 +1,9 @@
 import { AllOrders, Order } from "@/models/Order";
 import Image from "next/image";
+import React from "react";
 
-export default function OrderCard({ order }: { order: Order | AllOrders }) {
+
+function OldOrderCard({ order }: { order: Order | AllOrders }) {
     return (
         <div className="p-3 rounded-3 shadow-sm border bg-white mb-3">
             <div className="row g-3 align-items-start">
@@ -75,3 +77,5 @@ export default function OrderCard({ order }: { order: Order | AllOrders }) {
         </div>
     );
 }
+
+export const OrderCard = React.memo(OldOrderCard);

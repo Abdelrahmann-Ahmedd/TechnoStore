@@ -1,6 +1,6 @@
 "use client";
 import { Product } from '@/models/Product';
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useCallback } from 'react'
 
 type PageNumberProps = {
     products: Product[];
@@ -13,23 +13,22 @@ const PageNumber: React.FC<PageNumberProps> = ({products,setCurrentPage,currentP
     // Calculate total pages
     const totalPages = Math.ceil(products.length / 12);
     
-    
+    const handleCurrentPage = useCallback((page: number) => setCurrentPage(page)
+    ,[setCurrentPage])
+
     return (
         <nav className="mt-4">
             <ul className="pagination justify-content-center">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <li
-                key={page}
-                className={`page-item ${currentPage === page ? "active" : ""}`}
-                >
-                <button
-                    className="page-link"
-                    onClick={() => setCurrentPage(page)}
-                >
-                    {page}
+            {new Array(totalPages).fill(0).map((_, i) => {
+            const page = i + 1;
+            return (
+            <li key={page} className={`page-item ${currentPage === page ? "active" : ""}`}>
+                <button className="page-link" onClick={() => handleCurrentPage(page)}>
+                {page}
                 </button>
-                </li>
-            ))}
+            </li>
+            );
+            })}
             </ul>
         </nav>
     )

@@ -2,12 +2,36 @@ import { CartItem } from '@/models/Product'
 import { useAppDispatch } from '@/store/hooks';
 import { deleteItemFromCart, updateUserCart } from '@/store/slices/cartSlice';
 import Image from 'next/image';
-import React from 'react'
+import React, { useCallback } from 'react'
 import toast from 'react-hot-toast';
 
-export default function CartCard({item}:{item:CartItem}) {
+function OldCartCard({item}:{item:CartItem}) {
 
     const dispatch = useAppDispatch();
+    const handleDecrease = useCallback(() => {
+        if (item.count <= 1) return;
+        dispatch(updateUserCart({
+            id: item.product._id,
+            body: { count: item.count - 1 },
+            })
+        );
+        toast.success(`Decreased quantity of ${item.product.title}`);
+    },[dispatch,item.product._id,item.count,item.product.title])
+
+    const handleIncrease = useCallback(() => {
+        dispatch(
+            updateUserCart({
+                id: item.product._id,
+                body: { count: item.count + 1 },
+            })
+        );
+        toast.success(`Increased quantity of ${item.product.title}`);
+    },[dispatch,item.product._id,item.count,item.product.title])  
+    
+    const handleRemove = useCallback(() => {
+        dispatch(deleteItemFromCart(item.product._id));
+            toast.error(`${item.product.title} removed from cart`);
+    },[dispatch,item.product._id,item.product.title])
 
     return (
         <div className="row align-items-center mb-4 py-3 border rounded">
@@ -34,16 +58,7 @@ export default function CartCard({item}:{item:CartItem}) {
                 <div className="d-flex align-items-center mb-2">
                 <button
                     className="btn btn-outline-danger btn-sm px-3"
-                    onClick={() => {
-                    if (item.count <= 1) return;
-                    dispatch(
-                        updateUserCart({
-                        id: item.product._id,
-                        body: { count: item.count - 1 },
-                        })
-                    );
-                    toast.success(`Decreased quantity of ${item.product.title}`);
-                    }}
+                    onClick={handleDecrease}
                     disabled={item.count <= 1}
                 >
                     -
@@ -51,15 +66,7 @@ export default function CartCard({item}:{item:CartItem}) {
                 <span className="px-2 fs-4">{item.count}</span>
                 <button
                     className="btn btn-outline-success btn-sm px-3"
-                    onClick={() => {
-                    dispatch(
-                        updateUserCart({
-                        id: item.product._id,
-                        body: { count: item.count + 1 },
-                        })
-                    );
-                    toast.success(`Increased quantity of ${item.product.title}`);
-                    }}
+                    onClick={handleIncrease}
                 >
                     +
                 </button>
@@ -67,10 +74,7 @@ export default function CartCard({item}:{item:CartItem}) {
 
                 <button
                 className="btn btn-danger"
-                onClick={() => {
-                    dispatch(deleteItemFromCart(item.product._id));
-                    toast.error(`${item.product.title} removed from cart`);
-                }}
+                onClick={handleRemove}
                 >
                 🗑 Remove
                 </button>
@@ -78,3 +82,5 @@ export default function CartCard({item}:{item:CartItem}) {
         </div>
     )
 }
+
+export const CartCard = React.memo(OldCartCard);

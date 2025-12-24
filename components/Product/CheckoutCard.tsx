@@ -2,7 +2,8 @@ import { CartItem } from '@/models/Product'
 import Image from 'next/image'
 import React from 'react'
 
-export default function CheckoutCard({item}:{item:CartItem}) {
+
+function OldCheckoutCard({item}:{item:CartItem}) {
     return (
         <tr>
             <td className="d-flex align-items-center gap-2">
@@ -22,3 +23,5 @@ export default function CheckoutCard({item}:{item:CartItem}) {
         </tr>
     )
 }
+
+export const CheckoutCard = React.memo(OldCheckoutCard);

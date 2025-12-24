@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export default function SearchCard({searchModel}:{searchModel:SearchModel}) {
+function OldSearchCard({searchModel}:{searchModel:SearchModel}) {
 
 
     return (
@@ -26,3 +26,5 @@ export default function SearchCard({searchModel}:{searchModel:SearchModel}) {
         </Link>
     )
 }
+
+export const SearchCard = React.memo(OldSearchCard);

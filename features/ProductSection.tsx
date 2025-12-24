@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import ProductList from "@/components/Product/ProductList";
+import {ProductList} from "@/components/Product/ProductList";
 import React, { useMemo } from "react";
 import LoadingPage from "@/components/Layout/LoadingPage";
 
