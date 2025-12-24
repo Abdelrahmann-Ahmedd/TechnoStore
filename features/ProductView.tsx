@@ -7,7 +7,7 @@ import { Category, Product } from "@/models/Product";
 import LoadingPage from "@/components/Layout/LoadingPage";
 import toast from "react-hot-toast";
 import { PaginationPage } from "@/components/Product/PageNumber";
-import ProductList from "@/components/Product/ProductList";
+import {ProductList} from "@/components/Product/ProductList";
 
 export default function ProductView() {
   const dispatch = useAppDispatch();
