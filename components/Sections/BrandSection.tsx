@@ -1,16 +1,14 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import Carousel from "@/components/Ui/Carousel";
-import LoadingPage from "@/components/Layout/LoadingPage";
 import React from "react";
 import { CarouselSkeleton } from "../Ui/CarouselSkeleton";
+import { useAppSelector } from "@/store/hooks";
 
 function BrandSection() {
 
-    const brands = useSelector((state: RootState) => state.products.brands);
-    const loading = useSelector((state: RootState) => state.products.loading);
+    const {brands, loading} = useAppSelector((state) => state.products);
+
 
     if (loading && !brands.length) return <CarouselSkeleton />;
 

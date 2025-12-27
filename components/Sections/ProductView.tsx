@@ -11,7 +11,7 @@ import {ProductList} from "@/components/Product/ProductList";
 
 export default function ProductView() {
   const dispatch = useAppDispatch();
-  const { products, categories, loading, error } = useAppSelector((state) => state.products);
+  const { products, wishlistproducts, categories, loading, error } = useAppSelector((state) => state.products);
 
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -86,7 +86,7 @@ export default function ProductView() {
 
       {/* Products Grid */}
       <div className="row g-4">
-        <ProductList data={paginatedProducts} results={0}/>
+        <ProductList allData={{data: paginatedProducts, results: 0}} compare={wishlistproducts}/>
         {paginatedProducts.length === 0 && (
           <div className="col-12 text-center py-5">
             <h4>No products found in this category.</h4>

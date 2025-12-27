@@ -110,6 +110,13 @@ export interface CartResponse {
   data: CartData;
 }
 
+export interface WishlistResponse {
+  status: string;
+  message: string;
+  data: string[];
+}
+
+
 export interface SearchModel {
   product: Product;
   setShow: (flag: boolean) => void;

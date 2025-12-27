@@ -5,11 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/models/Product";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addProductToCart } from "@/store/slices/cartSlice";
+import { addProductToCart, deleteItemFromCart } from "@/store/slices/cartSlice";
 import { Button } from "../Ui/Button";
 import toast from "react-hot-toast";
+import { addProductToWishlist, deleteProductFromWishlist, fetchWishlistProducts } from "@/store/slices/productSlice";
 
-function OldCard({product,index}:{product: Product, index: number}) {
+function OldCard({product,index,active}:{product: Product, index: number, active: boolean}) {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.cart);
 
@@ -18,8 +19,31 @@ function OldCard({product,index}:{product: Product, index: number}) {
     toast.success(`${product.title} added to cart`);
   },[dispatch,product._id,product.title]);
 
+  const handleAddToWishlist = useCallback(async () => {
+    toast.loading(`${product.title} adding to wishlist....`);
+    try {
+      await dispatch(addProductToWishlist({ productId: product._id }));
+      dispatch(fetchWishlistProducts());
+      toast.success(`${product.title} added to wishlist`);
+    }finally {
+      toast.dismissAll()
+    }
+}, [dispatch, product._id, product.title]);
+
+const handleDeleteFromWishlist = useCallback(async () => {
+  toast.loading(`${product.title} Remove From wishlist....`);
+  try {
+    await dispatch(deleteProductFromWishlist(product._id));
+    dispatch(fetchWishlistProducts());
+    toast.success(`${product.title} removed from wishlist`);
+  }finally{
+    toast.dismissAll()
+  }
+}, [dispatch, product._id, product.title]);
+
+
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card position-relative" style={{ width: "18rem" }}>
       <Link href={`/product/${product._id}`}>
         <figure className="w-100">
           <Image
@@ -41,7 +65,11 @@ function OldCard({product,index}:{product: Product, index: number}) {
           <p className="card-text text-black">{product.price} EGP</p>
         </div>
       </Link>
-
+      {active ? (
+        <i onClick={handleDeleteFromWishlist} className="position-absolute fa-solid fa-heart fs-2 text-danger"></i>
+      ) : (
+        <i onClick={handleAddToWishlist} className="position-absolute fa-regular fa-heart fs-2"></i>
+      ) }
       <Button
         onClick={handleAdd}
         color="primary"

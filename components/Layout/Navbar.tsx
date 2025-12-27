@@ -59,6 +59,11 @@ export default function Navbar() {
                 <Link className="nav-link" href="/cart">Cart</Link>
               </li>
             )}
+            {mounted && token && (
+              <li className="nav-item">
+                <Link className="nav-link" href="/wishlist">WishList</Link>
+              </li>
+            )}
           </ul>
 
           {/* Search Bar */}

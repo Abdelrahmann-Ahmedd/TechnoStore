@@ -3,7 +3,8 @@ import { apiCall } from "./apiClient";
 
 const BASE_URL = "/products";
 const CATEGORY_BASE = "/categories";
-const BRAND_BASE = "/brands"
+const BRAND_BASE = "/brands";
+const WISHLIST_BASE = "/wishlist";
 
 export const ProductServices = {
     getAllProducts: () =>
@@ -48,5 +49,27 @@ export const ProductServices = {
             url: `${CATEGORY_BASE}/${id}/${subCategory}`,
             method: "GET",
         }),
+
+    getAllProductInWishlist: () =>
+        apiCall({
+            url: WISHLIST_BASE,
+            method: "GET",
+            withAuth: true
+        }),
+
+    addProductToWishlist: (body: object) =>
+    apiCall({
+        url: WISHLIST_BASE,
+        method: "POST",
+        data: body,
+        withAuth: true
+    }), 
+    
+    deleteProductFromWishlist: (id:string) =>
+    apiCall({
+        url: `${WISHLIST_BASE}/${id}`,
+        method: "DELETE",
+        withAuth: true
+    }), 
 };
 

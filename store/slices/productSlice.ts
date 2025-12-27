@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import {ProductServices} from "../../services/ProductServices";
-import { Brand, Category, PaginatedData, Product } from "@/models/Product";
+import { Brand, Category, PaginatedData, Product, Wishlist, WishlistResponse } from "@/models/Product";
 import { AxiosError } from "axios";
 
 interface ProductState {
   products: Product[];
+  wishlistproducts: Product[];
   categories: Category[];
   brands: Brand[],
   loading: boolean;
@@ -13,6 +14,7 @@ interface ProductState {
 
 const initialState: ProductState = {
   products: [],
+  wishlistproducts: [],
   categories: [],
   brands:[],
   loading: false,
@@ -61,6 +63,48 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
+export const fetchWishlistProducts = createAsyncThunk(
+  "products/fetchWishlistProducts",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data, error } = await ProductServices.getAllProductInWishlist();
+      if (error) return rejectWithValue(error);
+      return data as PaginatedData<Product>;
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message: string }>;
+      return rejectWithValue(axiosError.response?.data?.message || "Failed to fetch WishList.");
+    }
+  }
+);
+
+export const addProductToWishlist = createAsyncThunk(
+  "products/addProductToWishlist",
+  async (body: object, { rejectWithValue }) => {
+    try {
+      const { data, error } = await ProductServices.addProductToWishlist(body);
+      if (error) return rejectWithValue(error);
+      return data as WishlistResponse;
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message: string }>;
+      return rejectWithValue(axiosError.response?.data?.message || "Failed to add product to wishlist");
+    }
+  }
+);
+
+export const deleteProductFromWishlist = createAsyncThunk(
+  "products/deleteProductFromWishlist",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const { data, error } = await ProductServices.deleteProductFromWishlist(id);
+      if (error) return rejectWithValue(error);
+      return data as WishlistResponse;
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message: string }>;
+      return rejectWithValue(axiosError.response?.data?.message || "Failed to delete product From wishlist");
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -76,6 +120,18 @@ const productSlice = createSlice({
         state.products = action.payload.data;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // .addCase(fetchWishlistProducts.pending, (state) => {
+      //   state.loading = true;
+      //   state.error = null;
+      // })
+      .addCase(fetchWishlistProducts.fulfilled, (state, action: PayloadAction<PaginatedData<Product>>) => {
+        state.loading = false;
+        state.wishlistproducts = action.payload.data;
+      })
+      .addCase(fetchWishlistProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })

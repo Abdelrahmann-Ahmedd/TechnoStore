@@ -1,19 +1,18 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+
 import {ProductList} from "@/components/Product/ProductList";
 import React, { useMemo } from "react";
-import LoadingPage from "@/components/Layout/LoadingPage";
 import ProductCardSkeleton from "../Ui/ProductCardSkeleton";
+import { useAppSelector } from "@/store/hooks";
 
 function ProductSection() {
-    const products = useSelector((state: RootState) => state.products.products);
-    const loading = useSelector((state: RootState) => state.products.loading);
-
+    const {products, wishlistproducts, loading} = useAppSelector((state) => state.products);
     const memoMeta = useMemo(()=>{
         return { currentPage: 1, totalPages: 1 }
     },[])
+
+    
 
     return (
         <section className="container">
@@ -21,7 +20,7 @@ function ProductSection() {
             {loading&&products.length===0?(
                 <ProductCardSkeleton />
             ):(
-                <ProductList data={products} results={0}  metadata={memoMeta} />
+                <ProductList allData={{data:products , results:0 , metadata:memoMeta}} compare={wishlistproducts}  />
             )}
         </section>
     );

@@ -83,6 +83,17 @@ body {
   overflow: hidden;
 }
 
+.card .fa-heart {
+  left: 100%;
+  bottom: 90%;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.card:hover .fa-heart {
+  left: 80%;
+}
+
 .card button {
   transform: translateY(200%);
   transition: 0.5s;

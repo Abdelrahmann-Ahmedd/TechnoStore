@@ -41,7 +41,7 @@ function OldOrderCard({ order, index }: { order: Order | AllOrders, index: numbe
                             className="fw-semibold small text-truncate"
                             title={item.product.title}
                         >
-                            {item.product.title.split(" ").slice(0.8).join(" ")}
+                            {item.product.title.split(" ").slice(0,8).join(" ")}
                         </div>
                         <div className="text-muted small">× {item.count}</div>
                         </div>

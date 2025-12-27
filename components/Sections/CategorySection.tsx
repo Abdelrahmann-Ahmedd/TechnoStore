@@ -6,10 +6,10 @@ import CategorySlider from "@/components/Ui/CategorySlider";
 import React, { useMemo } from "react";
 import LoadingPage from "@/components/Layout/LoadingPage";
 import { CategorySliderSkeleton } from "../Ui/CategoryCardSkeleton";
+import { useAppSelector } from "@/store/hooks";
 
 function CategorySection() {
-    const categories = useSelector((state: RootState) => state.products.categories);
-    const loading = useSelector((state: RootState) => state.products.loading);
+    const {categories, loading} = useAppSelector((state) => state.products);
 
 
     const memoMetaData = useMemo(()=>{

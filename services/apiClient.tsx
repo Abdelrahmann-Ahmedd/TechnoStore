@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const API = axios.create({
     baseURL: "https://ecommerce.routemisr.com/api/v1",
-    timeout: 6000,
+    timeout: 10000,
     headers: { "Content-Type": "application/json" },
 });
 
