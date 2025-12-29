@@ -96,10 +96,10 @@ export default function LoginForm() {
         {myFormik.isSubmitting ? <Loader /> : "Login"}
       </button>
 
-      <div className='text-center w-50 mt-2'>
+      <div className='text-center w-100 mt-2'>
         Forgot <Link href="/forgotpassword">Password</Link>?
       </div>
-      <div className='text-center w-20'>
+      <div className='text-center w-100'>
         Don&apos;t have an account? <Link href="/signup">Register</Link>
       </div>
     </form>
