@@ -2,6 +2,7 @@
 import LoadingPage from '@/components/Layout/LoadingPage';
 import { PaginationPage } from '@/components/Product/PageNumber';
 import {ProductList} from '@/components/Product/ProductList';
+import ProductCardSkeleton from '@/components/Ui/ProductCardSkeleton';
 import { AppDispatch, RootState } from '@/store';
 import {fetchProducts } from '@/store/slices/productSlice';
 import Link from 'next/link';
@@ -28,7 +29,11 @@ export default function  AdminProducts() {
     <>
       <h2 className='fs-1 text-center p-4'>All Products</h2>
       <Link href="addProduct" className="btn btn-primary mb-3">Add Product</Link>
-      <ProductList allData={{data:paginatedProducts, results:0}} compare={wishlistproducts}/>
+      {loading&&products.length===0?(
+          <ProductCardSkeleton />
+      ):(
+          <ProductList allData={{data:paginatedProducts, results:0}} compare={wishlistproducts}/>
+      )}
       <PaginationPage currentPage={currentPage} products={products} setCurrentPage={setCurrentPage}/>
     </>
   )
