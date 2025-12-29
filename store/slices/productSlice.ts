@@ -10,6 +10,8 @@ interface ProductState {
   brands: Brand[],
   loading: boolean;
   error: string | null;
+  wishlistLoading: boolean;
+  initialLoaded: boolean;
 }
 
 const initialState: ProductState = {
@@ -19,6 +21,8 @@ const initialState: ProductState = {
   brands:[],
   loading: false,
   error: null,
+  wishlistLoading: false,
+  initialLoaded: false
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -118,21 +122,33 @@ const productSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<PaginatedData<Product>>) => {
         state.loading = false;
         state.products = action.payload.data;
+        if (
+          state.brands.length > 0 &&
+          state.categories.length > 0
+        ) {
+          state.initialLoaded = true;
+        }
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
-      // .addCase(fetchWishlistProducts.pending, (state) => {
-      //   state.loading = true;
-      //   state.error = null;
-      // })
+      .addCase(fetchWishlistProducts.pending, (state) => {
+        state.wishlistLoading = true;
+        state.error = null;
+      })
       .addCase(fetchWishlistProducts.fulfilled, (state, action: PayloadAction<PaginatedData<Product>>) => {
-        state.loading = false;
+        state.wishlistLoading = false;
         state.wishlistproducts = action.payload.data;
+        if (
+          state.brands.length > 0 &&
+          state.categories.length > 0
+        ) {
+          state.initialLoaded = true;
+        }
       })
       .addCase(fetchWishlistProducts.rejected, (state, action) => {
-        state.loading = false;
+        state.wishlistLoading = false;
         state.error = action.payload as string;
       })
       .addCase(fetchCategories.pending, (state) => {
@@ -142,6 +158,12 @@ const productSlice = createSlice({
       .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<{ data: Category[] }>) => {
         state.loading = false;
         state.categories = action.payload.data;
+        if (
+          state.brands.length > 0 &&
+          state.categories.length > 0
+        ) {
+          state.initialLoaded = true;
+        }
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
@@ -154,6 +176,12 @@ const productSlice = createSlice({
       .addCase(fetchBrands.fulfilled, (state, action: PayloadAction<PaginatedData<Brand>>) => {
         state.loading = false;
         state.brands = action.payload.data;
+        if (
+          state.brands.length > 0 &&
+          state.categories.length > 0
+        ) {
+          state.initialLoaded = true;
+        }
       })
       .addCase(fetchBrands.rejected, (state, action) => {
         state.loading = false;

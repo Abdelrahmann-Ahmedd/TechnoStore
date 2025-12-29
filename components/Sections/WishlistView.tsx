@@ -9,7 +9,7 @@ import { useEffect } from "react"
 export default function WishListView() {
 
     const dispatch = useAppDispatch();
-    const {wishlistproducts , loading ,error} = useAppSelector((state)=> state.products);
+    const {wishlistproducts , wishlistLoading ,error} = useAppSelector((state)=> state.products);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -22,7 +22,7 @@ export default function WishListView() {
 
 
 
-    if(wishlistproducts.length === 0 && !loading){
+    if(wishlistproducts.length === 0 && !wishlistLoading){
         return (
             <section className="text-center mt-5">
                 <h2>WishList is Empty</h2>
@@ -34,7 +34,7 @@ export default function WishListView() {
     return (
         <section className="container">
             <h2 className="fs-1 mt-3 text-center">Wishlist</h2>
-            {loading?(
+            {wishlistLoading?(
                 <ProductCardSkeleton />
             ):(
                 <ProductList allData={{data:wishlistproducts, results: 0 }} compare={wishlistproducts} />
