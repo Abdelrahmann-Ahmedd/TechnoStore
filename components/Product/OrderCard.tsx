@@ -2,14 +2,13 @@ import { AllOrders, Order } from "@/models/Order";
 import Image from "next/image";
 import React from "react";
 
-
-function OldOrderCard({ order, index }: { order: Order | AllOrders, index: number }) {
+function OldOrderCard({ order, index }: { order: Order | AllOrders; index: number }) {
     return (
-        <div className="p-3 rounded-3 shadow-sm border bg-white mb-3 overflow-hidden">
+        <div className="p-3 rounded-3 shadow-sm border bg-white mb-3 overflow-hidden w-100">
             <div className="row g-3 align-items-start">
 
                 {/* Order ID */}
-                <div className="col-12 col-sm-6 col-md-3">
+                <div className="col-12 col-sm-6 col-md-3 text-truncate">
                 <h6 className="mb-1 text-muted small">Order ID</h6>
                 <div className="fw-semibold text-break text-truncate">{order._id}</div>
                 </div>
@@ -25,7 +24,7 @@ function OldOrderCard({ order, index }: { order: Order | AllOrders, index: numbe
                     >
                         <div
                         className="flex-shrink-0"
-                        style={{ width: 60, height: 60, position: "relative" }}
+                        style={{ width: 60, height: 60, position: "relative", minWidth: 0 }}
                         >
                         <Image
                             priority={index < 5}
@@ -41,7 +40,7 @@ function OldOrderCard({ order, index }: { order: Order | AllOrders, index: numbe
                             className="fw-semibold small text-truncate"
                             title={item.product.title}
                         >
-                            {item.product.title.split(" ").slice(0,8).join(" ")}
+                            {item.product.title.split(" ").slice(0, 8).join(" ")}
                         </div>
                         <div className="text-muted small">× {item.count}</div>
                         </div>
@@ -51,13 +50,13 @@ function OldOrderCard({ order, index }: { order: Order | AllOrders, index: numbe
                 </div>
 
                 {/* Total Price */}
-                <div className="col-6 col-sm-4 col-md-2 text-center text-md-start">
+                <div className="col-6 col-sm-4 col-md-2 text-center text-md-start text-truncate">
                 <h6 className="mb-1 text-muted small">Total</h6>
                 <div className="fw-semibold">{order.totalOrderPrice} EGP</div>
                 </div>
 
                 {/* Status */}
-                <div className="col-6 col-sm-4 col-md-1 text-center text-md-start">
+                <div className="col-6 col-sm-4 col-md-1 text-center text-md-start text-truncate">
                 <h6 className="mb-1 text-muted small">Status</h6>
                 <span
                     className={`badge ${
@@ -69,7 +68,7 @@ function OldOrderCard({ order, index }: { order: Order | AllOrders, index: numbe
                 </div>
 
                 {/* Date */}
-                <div className="col-12 col-sm-4 col-md-2 text-md-end text-muted small">
+                <div className="col-12 col-sm-4 col-md-2 text-md-end text-muted small text-truncate">
                 <h6 className="mb-1 text-muted small">Date</h6>
                 {order.createdAt.split("T")[0]}
                 </div>

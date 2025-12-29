@@ -25,7 +25,7 @@ export default function AllOrder() {
   return (
     <div className="container my-5">
       <h2 className="text-center mb-4 fw-bold">All Orders</h2>
-      <div className="d-flex flex-column gap-4">
+      <div className="">
         {allOrders.map((order,ind) => (
           <OrderCard key={order._id} order={order} index={ind} />
         ))}

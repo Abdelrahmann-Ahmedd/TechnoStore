@@ -1,16 +1,13 @@
 "use client";
 
 import AdminSidebar from "@/components/Layout/AdminSidebar";
-import "@/components/Chart/ChartSetup";
 import ClientStoreProvider from "@/components/ClientSideProvider";
+import "@/components/Chart/ChartSetup";
+import React from "react";
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="d-flex">
+    <div className="d-flex" style={{ overflowX: "hidden" }}>
       {/* Sidebar */}
       <AdminSidebar />
 
@@ -22,9 +19,10 @@ export default function AdminLayout({
             padding: "10px",
             minHeight: "100vh",
             backgroundColor: "#f8f9fa",
+            overflowX: "hidden", // prevent horizontal scroll
           }}
         >
-          <div className="container-fluid">{children}</div>
+          <div className="container">{children}</div>
         </main>
       </ClientStoreProvider>
 
@@ -37,7 +35,7 @@ export default function AdminLayout({
 
         @media (max-width: 767.98px) {
           main {
-            margin-left: 0; /* full width on small screens */
+            margin-left: 0;
           }
         }
       `}</style>
