@@ -40,8 +40,8 @@ function OldCartCard({item,index}:{item:CartItem,index:number}) {
                 src={item.product.imageCover}
                 alt={item.product.title}
                 className="w-50 img-fluid rounded"
-                priority={index < 5}
-                loading={index < 5 ? "eager" : "lazy"}
+                priority={index < 8}
+                loading={index < 8 ? "eager" : "lazy"}
                 width={200}
                 height={200}
                 />

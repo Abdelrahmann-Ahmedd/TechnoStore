@@ -107,28 +107,64 @@ body {
 .skeleton {
   background: linear-gradient(
     90deg,
-    #eee 25%,
+    #eaeaea 25%,
     #f5f5f5 37%,
-    #eee 63%
+    #eaeaea 63%
   );
   background-size: 400% 100%;
   animation: shimmer 1.4s ease infinite;
   border-radius: 6px;
 }
 
-.skeleton-img {
-  height: 400px;
-  width: 100%;
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }
 
+/* Image */
+.skeleton-img {
+  height: 300px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Text */
 .skeleton-text {
-  height: 14px;
+  height: 16px;
   width: 100%;
 }
 
 .skeleton-text.small {
-  width: 60%;
+  width: 65%;
+  margin: auto;
 }
+
+/* Price */
+.skeleton-price {
+  height: 18px;
+  width: 40%;
+}
+
+/* Heart icon */
+.skeleton-heart {
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+/* Button */
+.skeleton-btn {
+  height: 38px;
+  width: 100%;
+  border-radius: 8px;
+}
+
 
 .skeleton-circle {
   width: 160px;
