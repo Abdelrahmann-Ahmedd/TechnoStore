@@ -27,8 +27,8 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm w-100">
       <div className="container py-2">
         {/* Logo */}
-        <Link href="/" className="navbar-brand fw-bold text-primary fs-4">
-          Techno Store
+        <Link href="/" className="navbar-brand text-primary fs-4">
+          <h1 className="fs-4 fw-bold m-auto">Techno Store</h1>
         </Link>
 
         {/* Toggle button for mobile */}
