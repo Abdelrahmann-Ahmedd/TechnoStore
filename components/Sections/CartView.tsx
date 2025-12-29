@@ -51,7 +51,7 @@ export default function CartView() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-5">🛒 Your Cart</h1>
+      <h2 className="text-center mb-5">🛒 Your Cart</h2>
 
       {products.map((item,ind) => (
         <CartCard key={item._id} item={item} index={ind} />
@@ -59,7 +59,7 @@ export default function CartView() {
 
       <div className="row mt-4 pt-3 border-top align-items-center">
         <div className="col-12 col-md-6">
-          <h5 className="text-primary fs-3">Total: {cart?.data?.totalCartPrice} EGP</h5>
+          <h4 className="text-primary fs-3">Total: {cart?.data?.totalCartPrice} EGP</h4>
           <Button outline={false} rounded={2} color="primary" href="/checkout" target={false}  >Checkout</Button>
         </div>
         <div className="col-12 col-md-6 text-md-end mt-2 mt-md-0">

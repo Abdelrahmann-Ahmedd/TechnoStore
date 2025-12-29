@@ -117,14 +117,14 @@ export default function CheckoutView() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4">Checkout</h1>
+      <h2 className="text-center mb-4">Checkout</h2>
 
       {!cart || cart.numOfCartItems === 0 ? (
         <p className="text-center">Your cart is empty.</p>
       ) : (
         <>
           <div className="mb-4">
-            <h4>Shipping Info</h4>
+            <h3>Shipping Info</h3>
             <div className="d-flex flex-column gap-3">
               <input
                 type="text"
@@ -171,7 +171,7 @@ export default function CheckoutView() {
             </table>
 
             <div className="d-flex justify-content-between align-items-center mt-4">
-              <h4>Total: {cart.data.totalCartPrice} EGP</h4>
+              <h3>Total: {cart.data.totalCartPrice} EGP</h3>
               <div className="d-flex gap-3">
                 <button
                   className="btn btn-outline-success"

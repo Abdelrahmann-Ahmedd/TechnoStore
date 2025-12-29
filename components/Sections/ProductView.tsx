@@ -54,7 +54,7 @@ export default function ProductView() {
     <div className="container my-5">
       {/* Filters */}
         <div className="m-auto mb-4 w-75 d-flex flex-column align-items-center">
-          <h1 className="mb-2">Category</h1>
+          <h2 className="mb-2">Category</h2>
           <select
             className="form-select w-75 text-center"
             value={selectedCategory}
@@ -76,7 +76,7 @@ export default function ProductView() {
         <div onClick={() =>
               setSortOrder(sortOrder === "asc" ? "desc" : "asc")
             } style={{cursor:"pointer"}} className="col-md-12 d-flex justify-content-center justify-content-md-end align-items-center mt-3 mt-md-0">
-          <h5 className="ms-auto mb-0">Sort</h5>
+          <h3 className="ms-auto mb-0">Sort</h3>
           <i
             className={`fa-solid text-primary fa-filter fa-lg cursor-pointer`}
             title={sortOrder === "asc" ? "Low to High" : "High to Low"}
@@ -89,7 +89,7 @@ export default function ProductView() {
         <ProductList allData={{data: paginatedProducts, results: 0}} compare={wishlistproducts}/>
         {paginatedProducts.length === 0 && (
           <div className="col-12 text-center py-5">
-            <h4>No products found in this category.</h4>
+            <h3>No products found in this category.</h3>
           </div>
         )}
       </div>

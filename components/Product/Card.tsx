@@ -47,7 +47,7 @@ const handleDeleteFromWishlist = useCallback(async () => {
       <Link href={`/product/${product._id}`}>
         <figure className="w-100">
           <Image
-            priority={index < 4}
+            priority={index < 8}
             loading={index < 8 ? "eager" : "lazy"}
             style={{ width: "auto", height: "auto" }}
             width={300}
@@ -61,7 +61,7 @@ const handleDeleteFromWishlist = useCallback(async () => {
           <h4 className="card-title text-black">
             {product.title.split(" ").slice(0, 2).join(" ")}
           </h4>
-          <h6 className="card-title text-primary">{product.category.name}</h6>
+          <h4 className="card-title text-primary">{product.category.name}</h4>
           <p className="card-text text-black">{product.price} EGP</p>
         </div>
       </Link>

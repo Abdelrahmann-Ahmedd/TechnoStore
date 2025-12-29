@@ -59,7 +59,7 @@ function CategorySlider({ data }: PaginatedData<Category>) {
                   className="category-img rounded-circle"
                 />
               </div>
-              <h6 className="fw-semibold mt-2 text-truncate">{cat.name}</h6>
+              <h3 className="fw-semibold mt-2 text-truncate">{cat.name}</h3>
             </div>
           </div>
         ))}

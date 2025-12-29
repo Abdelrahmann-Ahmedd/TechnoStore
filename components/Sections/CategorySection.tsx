@@ -1,10 +1,7 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import CategorySlider from "@/components/Ui/CategorySlider";
 import React, { useMemo } from "react";
-import LoadingPage from "@/components/Layout/LoadingPage";
 import { CategorySliderSkeleton } from "../Ui/CategoryCardSkeleton";
 import { useAppSelector } from "@/store/hooks";
 

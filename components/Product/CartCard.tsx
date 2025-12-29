@@ -48,7 +48,7 @@ function OldCartCard({item,index}:{item:CartItem,index:number}) {
             </div>
 
             <div className="col-12 col-md-6">
-                <h5>{item.product.title}</h5>
+                <h4>{item.product.title}</h4>
                 <p className="mb-1 text-muted">
                 {item.product.price} EGP × {item.count}
                 </p>

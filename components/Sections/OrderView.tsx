@@ -29,7 +29,7 @@ export default function OrderView() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4 fw-bold">My Orders</h1>
+      <h2 className="text-center mb-4 fw-bold">My Orders</h2>
 
       <div className="d-flex flex-column gap-4">
         {orders.map((order,ind) => (
