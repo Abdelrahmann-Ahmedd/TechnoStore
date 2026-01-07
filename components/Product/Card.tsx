@@ -13,6 +13,7 @@ import { addProductToWishlist, deleteProductFromWishlist, fetchWishlistProducts 
 function OldCard({product,index,active}:{product: Product, index: number, active: boolean}) {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.cart);
+  const { token } = useAppSelector((state) => state.auth);
 
   const handleAdd = useCallback(() => {
     dispatch(addProductToCart({ productId: product._id }));
@@ -65,20 +66,24 @@ const handleDeleteFromWishlist = useCallback(async () => {
           <p className="card-text text-black">{product.price} EGP</p>
         </div>
       </Link>
-      {active ? (
+      {token&&(
+        active ? (
         <i onClick={handleDeleteFromWishlist} className="position-absolute fa-solid fa-heart fs-2 text-danger"></i>
       ) : (
         <i onClick={handleAddToWishlist} className="position-absolute fa-regular fa-heart fs-2"></i>
-      ) }
-      <Button
-        onClick={handleAdd}
-        color="primary"
-        rounded={3}
-        outline={false}
-        target={false}
-      >
+      ) 
+      )}
+      {token&&(
+        <Button
+          onClick={handleAdd}
+          color="primary"
+          rounded={3}
+          outline={false}
+          target={false}
+        >
         {loading ? "Adding..." : "Add To Cart"}
       </Button>
+      )}
     </div>
   );
 }
